@@ -63,41 +63,41 @@ Controllers are the middleman between the views and models. They perform the nec
 ## PROGRESS
 ### Front End: 0%
 #### Users
-[] Prototype
-[] CSS (Responsive)
-[] JS
+- [] Prototype
+- [] CSS (Responsive)
+- [] JS
 
 #### Posts
-[] Prototype
-[] CSS (Responsive)
-[] JS
+- [] Prototype
+- [] CSS (Responsive)
+- [] JS
 
 #### Comments
-[] Prototype
-[] CSS (Responsive)
-[] JS
+- [] Prototype
+- [] CSS (Responsive)
+- [] JS
 
 ### Back End: 43.75%
 #### Users
-[x] Create (Register)
-[x] Read all
-[x] Read one
-[x] Update user profile
-[x] Update user type
-[x] Delete user
+- [x] Create (Register)
+- [x] Read all
+- [x] Read one
+- [x] Update user profile
+- [x] Update user type
+- [x] Delete user
 
 #### Posts
-[] Create
-[x] Read all
-[] Read one
-[] Update post
-[] Delete post
+- [] Create
+- [x] Read all
+- [] Read one
+- [] Update post
+- [] Delete post
 
 #### Comments
-[] Create
-[] Read all
-[] Read one
-[] Update post
-[] Delete post
+- [] Create
+- [] Read all
+- [] Read one
+- [] Update post
+- [] Delete post
 
 
