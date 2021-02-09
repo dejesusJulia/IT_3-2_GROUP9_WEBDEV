@@ -38,7 +38,13 @@ $core->get('user/home', 'Pages@userHome');
 
 #ADMIN
 $core->get('admin/dashboard', 'Pages@dash');
+$core->get('admin/home', 'Pages@adminHome');
+
 $core->get('admin/user-list', 'Pages@userList');
+$core->get('admin/user-edit', 'Users@editUserType');
+$core->post('admin/user-edit', 'Users@updateUserTypes');
+$core->post('admin/user-delete', 'Users@userDestroy');
+
 $core->get('admin/post-list', 'Pages@postList');
 $core->get('admin/post-view', 'Pages@postView');
 

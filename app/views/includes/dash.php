@@ -28,7 +28,11 @@
                 </li>
 
                 <li>
-                    <a href="../home">Home</a>
+                    <a href="../admin/home">Home</a>
+                </li>
+
+                <li>
+                    <a href="../index">Logout</a>
                 </li>
             </ul>
         </nav>

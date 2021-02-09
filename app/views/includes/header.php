@@ -19,14 +19,25 @@
                 </li>
 
                 <?php
-                    if(!isset($_SESSION['user']['user_type'])){
-                        echo '<li><a href="login">Login</a></li>';
-                        echo '<li><a href="register">Register</a></li>';
-                    }else{
-                        echo '<li><a href="../user/timeline">Timeline</a></li>';
-                        echo '<li><a href="../index">Logout</a></li>';
-                    }
+                    // if(!isset($_SESSION['user']['user_type'])){
+                    //     echo '<li><a href="login">Login</a></li>';
+                    //     echo '<li><a href="register">Register</a></li>';
+                    // }else{
+                    //     echo '<li><a href="../user/timeline">Timeline</a></li>';
+                    //     echo '<li><a href="../index">Logout</a></li>';
+                    // }
                 ?>
+
+                <?php if(!isset($_SESSION['user']['user_type'])):?>
+                    <li><a href="login">Login</a></li>
+                    <li><a href="register">Register</a></li>
+                <?php elseif($_SESSION['user']['user_type'] == 'user'):?>
+                    <li><a href="../user/timeline">Timeline</a></li>
+                    <li><a href="../index">Logout</a></li>
+                <?php elseif($_SESSION['user']['user_type'] == 'admin'):?>
+                    <li><a href="../admin/dashboard">Dashboard</a></li>
+                    <li><a href="../index">Logout</a></li>
+                <?php endif;?>
             </ul>            
         </nav>
     </header>

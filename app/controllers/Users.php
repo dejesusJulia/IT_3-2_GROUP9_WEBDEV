@@ -13,6 +13,26 @@ class Users extends Controller{
         $this->view('profile', $data);
     }
 
+    # UPDATE USER TYPE GET REQUEST
+    public function editUserType($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $user = $this->userModel->getUser($i);
+        $data = [
+            'userData' => $user,
+            'user' => 'user',
+            'admin' => 'admin',
+            
+        ];
+        $this->view('admins/user-edit', $data);
+    }
+
     # LOGIN POST
     public function login(){
         $errors = $this->userModel->loginErrors();
@@ -109,9 +129,41 @@ class Users extends Controller{
         $this->view('profile', $errors);
     }
 
-    # UPDATE USER TYPE
-    public function updateUserType(){
-        // code here
+    # UPDATE USER TYPE POST REQUEST
+    public function updateUserTypes($i){
+        session_start();
+        // var_dump($_POST);
+        // $data['post'] = $_POST;
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $request['user_type'] = $_POST['user_type'];
+            $request['user_id'] = $i;
+            // $this->userModel->updateUserType($request);
+            if($this->userModel->updateUserType($request)){
+                $data['successMsg'] = '<p>Profile updated!</p>';
+            }else{
+                $data['errorMsg'] = '<p>Profile not updated!</p>';
+            }
+            
+        }
+        $data['userData'] = $this->userModel->getUser($i);
+        $data['user'] = 'user';
+        $data['admin'] = 'admin';
+        $this->view('admins/user-edit', $data);
+    }
+
+    public function userDestroy($i){
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if($this->userModel->deleteUser($i)){
+                $_SESSION['successMsg'] = 'User deleted!';
+                header('Location: ../admin/user-list');
+                die();
+            }else{
+                $_SESSION['errorMsg'] = 'User not deleted.';
+                header('Location: ../admin/user-list');
+                die();
+            }
+        }
     }
 
 

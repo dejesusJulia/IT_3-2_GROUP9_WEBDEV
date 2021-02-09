@@ -49,7 +49,8 @@
                     <div class="media-body">
                         <h5 class="mt-0"><?php echo $post->show_author == false ? 'Anonymous' : $post->username?></h5>
                         
-                        <?php echo $post->body;?>
+                        <p><?php echo $post->body;?></p>
+                        <small><?php echo $post->created_at;?></small>
                     </div>
                 </div>
             </div>

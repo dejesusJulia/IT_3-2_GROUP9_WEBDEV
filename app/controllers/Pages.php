@@ -39,6 +39,11 @@ class Pages extends Controller{
         $this->view('home');
     }
 
+    # REDIRECT HOME FOR ADMIN
+    public function adminHome(){
+        $this->view('home');
+    }
+
     # ADMIN DASHBOARD/HOME
     public function dash(){
         session_start();

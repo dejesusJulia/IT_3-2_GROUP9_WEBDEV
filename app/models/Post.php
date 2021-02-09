@@ -31,12 +31,31 @@ class Post extends Model{
         return $post;
     }
 
-    // INSERT SINGLE POST 
+    # INSERT SINGLE POST W/O IMG
     public function insertOne($post){
-        $this->db->query('INSERT INTO ' . $this->table . '(body, user_id) VALUES(:body, :user_id)');
+        $this->db->query('INSERT INTO ' . $this->table . '(body, user_id, show_author) VALUES(:body, :user_id, :show_author)');
 
         $this->db->bind(":body", $post['body']);
         $this->db->bind(":user_id", $post['user_id']);
+        $this->db->bind(":show_author", $post['show_author']);
+        $this->db->executes();
+    }
+
+    # INSERT SINGLE POST W IMG
+    public function insertOneWithImg($post){
+        $this->db->query('INSERT INTO ' . $this->table . '(body, img, user_id, show_author) VALUES(:body, :img, :user_id, :show_author)');
+
+        $this->db->bind(":body", $post['body']);
+        $this->db->bind(":img", $post['img']);
+        $this->db->bind(":user_id", $post['user_id']);
+        $this->db->bind(":show_author", $post['show_author']);
+        $this->db->executes();
+    }
+
+    # DELETE POST
+    public function deletePost($post){
+        $this->db->query('DELETE FROM ' . $this->table . ' WHERE post_id = :post_id');
+        $this->db->bind(':post_id', $post);
         $this->db->executes();
     }
 

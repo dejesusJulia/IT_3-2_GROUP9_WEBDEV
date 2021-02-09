@@ -16,7 +16,7 @@ class Model{
         $this->db = new Database();
     }
    
-    // READ
+    # READ
     protected function selectAll($table){
         $this->tbl = $table;
         $this->db->query("SELECT * FROM $this->tbl");
@@ -35,19 +35,12 @@ class Model{
         return $result;
     }
 
+    # JOIN USERS AND POSTS TABLE
     public function joinUserPost(){
-        $this->db->query("SELECT posts.body, posts.img, posts.show_author, posts.created_at, users.username FROM posts, users WHERE posts.user_id = users.user_id");
+        $this->db->query("SELECT posts.body, posts.img, posts.show_author, posts.created_at, users.username FROM posts, users WHERE posts.user_id = users.user_id ORDER BY created_at DESC");
         $result = $this->db->resultSet();
 
         return $result;
-    }
-
-    // DELETE ONE
-    protected function destroy($item, $table){
-        $this->tbl = $table;
-        $this->db->query('DELETE FROM ' . $this->tbl . ' WHERE id = :id');
-        $this->db->bind(':id', $item);
-        $this->db->executes();
     }
     
     // SET UP ERROR HANDLER

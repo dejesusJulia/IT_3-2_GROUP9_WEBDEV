@@ -57,13 +57,28 @@ class User extends Model{
         $this->db->executes();
     }
 
-    #UPDATE USER TYPE
+    # UPDATE USER TYPE
     public function updateUserType($user){
+        $msg = false;
         $this->db->query('UPDATE ' . $this->table . ' SET user_type=:user_type WHERE user_id =:user_id');
 
         $this->db->bind(":user_type", $user['user_type']);
         $this->db->bind(":user_id", $user['user_id']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
+    }
+
+    # DELETE USER 
+    public function deleteUser($user){
+        $msg = false;
+        $this->db->query('DELETE FROM ' . $this->table . ' WHERE user_id = :user_id');
+        $this->db->bind(':user_id', $user);
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
     }
 
     # ERROR HANDLER FOR REGISTER
