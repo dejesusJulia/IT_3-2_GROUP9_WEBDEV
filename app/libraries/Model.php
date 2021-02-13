@@ -28,11 +28,21 @@ class Model{
     protected function selectOne($table, $columnName, $value){
         $this->tbl = $table;
         $this->columnName = $columnName;
-        $this->db->query("SELECT * FROM $this->table WHERE " .$this->columnName . ' = :' . $this->columnName);
+        $this->db->query("SELECT * FROM $this->tbl WHERE " .$this->columnName . ' = :' . $this->columnName);
         $this->db->bind(":$this->columnName", $value);
         $result = $this->db->resultSingle();
 
         return $result;
+    }
+
+    protected function selectMany($table, $columnName, $value){
+        $this->tbl = $table;
+        $this->columnName = $columnName;
+        $this->db->query("SELECT * FROM $this->tbl WHERE $this->columnName " . "=:$this->columnName");
+        $this->db->bind(":$this->columnName", $value);
+        $results = $this->db->resultSet();
+
+        return $results;
     }
 
     # JOIN USERS AND POSTS TABLE

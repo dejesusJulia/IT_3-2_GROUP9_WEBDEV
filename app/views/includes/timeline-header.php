@@ -11,23 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-        <nav>  
-            <ul>
-                <li>
-                    <a href="home">Home</a>
-                </li>
-
-                <?php if(!isset($_SESSION['user']['user_type'])):?>
-                    <li><a href="login">Login</a></li>
-                    <li><a href="register">Register</a></li>
-                <?php elseif($_SESSION['user']['user_type'] == 'user'):?>
-                    <li><a href="../user/timeline?<?php echo $_SESSION['user']['user_id'];?>">Timeline</a></li>
-                    <li><a href="../index">Logout</a></li>
-                <?php elseif($_SESSION['user']['user_type'] == 'admin'):?>
-                    <li><a href="../admin/dashboard">Dashboard</a></li>
-                    <li><a href="../index">Logout</a></li>
-                <?php endif;?>
-            </ul>            
-        </nav>
-    </header>
+    <h1>Welcome, user!</h1>
+    <a href="../user/home">Home</a>
+    <a href="../user/publish">Publish</a>
+    <a href="../index">Logout</a>

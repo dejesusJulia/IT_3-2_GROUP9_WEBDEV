@@ -1,23 +1,78 @@
 <?php 
-
+/* CONTROLS ALL POSTS TABLE RELATED POST REQUEST*/
 class Posts extends Controller{
     public function __construct()
     {
         $this->postModel = $this->model('Post');
     }
 
+    # CREATE POST
     public function addPost(){
-        echo '<pre>';
-        var_dump($_POST); 
-        echo '</pre>';  
-        
-        echo '<pre>';
-        var_dump($_FILES); 
-        echo '</pre>'; 
+        $posts = $this->postModel->joinUserPost();
+        $errors = $this->postModel->postErrors();
+
+        // ON SUBMIT
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $img = [];  // ARRAY FOR IMAGE
+            $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            // INPUT TO FILTER
+            $toFilter = [
+                'body' => $_POST['body']
+            ];
+            if($_FILES['img']['name'] !== ''){
+                // FILTER FILE TYPE, SIZE, AND UPLOAD ERROR
+                $img['typeSizeError'] = $_FILES['img']['type'] . ':' . strval($_FILES['img']['size']) . ':' .strval($_FILES['img']['error']);
+                // SAVE TEMP NAME
+                $img['tmp'] = $_FILES['img']['tmp_name'];
+                // GET EXTENSION
+                $getExt = explode('.', $_FILES['img']['name']);
+                $img['ext'] = end($getExt);
+                // ADD TO FILTER
+                $toFilter['img'] = $img['typeSizeError'];
+            }
+            $keys = array_keys($toFilter);
+
+            // CALL FILTER FUNCTION
+            $errors = $this->filter()->postFilter($toFilter, $errors);
+            $ctr = $this->filter()->errorCounter($errors, $keys);
+            
+            // IF THERE ARE NO ERRORS
+            if($ctr == 0){     
+                $post = [
+                    'body' => filter_var($_POST['body'], FILTER_SANITIZE_STRING),
+                    'user_id' => $_POST['user_id'],
+                    'show_author' => $showAuthor
+                ];
+
+                if($_FILES['img']['name'] !== ''){
+                    $imgLoc = $this->filter()->imageUpload($img['tmp'], $img['ext']);
+                    // ADD TO POST 
+                    $post['img'] = $imgLoc;
+                    // INSERT DATA W/ IMAGE TO TABLE 
+                    $this->postModel->insertOneWithImg($post);
+                }else{
+                    // INSERT DATA W/O TO TABLE
+                    $this->postModel->insertOne($post);
+                }
+                header('Location: ../user/home'); 
+                die();
+            }
+        }
+
+        // PASS VARIABLES
+        $data = [
+            'posts' => $posts,
+            'err' => $errors
+        ];
+        $this->view('home', $data);
     }
 
-    public function updatePost(){
-        // code
+    public function updatePost($i){
+        
+    }
+
+    public function deletePost($i){
+
     }
     
 

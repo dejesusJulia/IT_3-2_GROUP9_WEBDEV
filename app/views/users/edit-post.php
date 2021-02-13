@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="edit-post" method="post">
+<?php include_once '../app/views/includes/timeline-header.php';?>
+    
+    <form action="../user/edit-post" method="post" enctype="multipart/form-data">
         <div>
-            <input type="text" name="title" id="title" placeholder="title">
+            <textarea name="body" id="body" cols="30" rows="10" placeholder="body"><?php echo $data->body;?></textarea>
         </div>
 
         <div>
-            <textarea name="body" id="body" cols="30" rows="10" placeholder="body"></textarea>
+            <input type="file" name="img" id="img" value="<?php echo $data->img;?>">
         </div>
 
-        <div>
-            <input type="file" name="img" id="img">
-        </div>
+        <input type="hidden" name="user_id" value="<?php echo $data->user_id;?>">
 
         <div>
-            <select name="show-author" id="showAuthor">
-                <option value="0">Anonymous</option>
-                <option value="1">Username</option>
+            <select name="show_author" id="showAuthor">
+            <?php
+            $anon = 0; $user = 1;
+            ?>
+                <option value="<?php echo $anon;?>" <?php echo $anon == $data->show_author ? 'selected' : '';?>>Anonymous</option>
+
+                <option value="<?php echo $user;?>" <?php echo $user == $data->show_author ? 'selected' : '';?>><?php echo $_SESSION['user']['username'];?></option>
             </select>
         </div>
 

@@ -3,15 +3,15 @@
 class Auth{
 
     protected $auth = '';
-    public $id;
+    public $type;
     public string $hash = '';
 
     // FOR VERIFYING USER CREDENTIALS
-    public function verifyCredentials($input, $password, $type){
+    public function verifyCredentials($credentials){
         $user = '';
-        $this->hash = $password;
-        if(password_verify($input, $this->hash)){
-           $user = $this->identifyUserType($type);
+        $this->hash = $credentials['password'];
+        if(password_verify($credentials['input'], $this->hash)){
+           $user = $this->identifyUserType($credentials['user_type'],$credentials['user_id']);
         }else{
             $user = 'Invalid password';
         } 
@@ -19,11 +19,11 @@ class Auth{
     }
 
     // VERIFYING USER TYPE
-    public function identifyUserType($userType){
-        $this->id = $userType;
-        switch($this->id){
+    public function identifyUserType($userType, $userId){
+        $this->type = $userType;
+        switch($this->type){
             case 'user': 
-                $this->auth = 'user/timeline';
+                $this->auth = 'user/timeline?' . $userId;
                 break;
             case 'admin': 
                 $this->auth = 'admin/dashboard';
@@ -34,6 +34,11 @@ class Auth{
         }
 
         return $this->auth;
+    }
+
+    # PAGE REDIRECTION
+    public function redirectPage($auth){
+
     }
 
     // restrict pages with variables

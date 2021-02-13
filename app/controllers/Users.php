@@ -56,7 +56,13 @@ class Users extends Controller{
                     $errors['message'] = 'Account does not exist';
                 }else{
                     // IF ACCOUNT IS AUTHENTICATED
-                    $auth = $this->auth()->verifyCredentials($data['password'], $email->password, $email->user_type);
+                    $credentials = [
+                        'input' => $data['password'],
+                        'password' => $email->password,
+                        'user_type' => $email->user_type,
+                        'user_id' => $email->user_id
+                    ];
+                    $auth = $this->auth()->verifyCredentials($credentials);
 
                     // IF PASSWORD IS VALID
                     if($auth !== 'Invalid password'){

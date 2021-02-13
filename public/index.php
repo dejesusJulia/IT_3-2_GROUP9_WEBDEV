@@ -33,8 +33,12 @@ $core->get('register', 'Pages@register');
 $core->post('register', 'Users@register');
 
 #USERS
-$core->get('user/timeline', 'Pages@defaultHome');
+$core->get('user/timeline', 'Pages@userTimeline');
 $core->get('user/home', 'Pages@userHome');
+
+$core->post('user/home', 'Posts@addPost');
+$core->get('user/edit-post', 'Pages@editPost');
+$core->post('user/edit-post', 'Posts@updatePost');
 
 #ADMIN
 $core->get('admin/dashboard', 'Pages@dash');

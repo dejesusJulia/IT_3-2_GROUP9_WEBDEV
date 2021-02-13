@@ -35,13 +35,19 @@ define('SITENAME', 'App name');
 
 ### Routing
 The web routes are found in *public/index.php*. The format is stated below:
-`$core->get('your/preferred/url', 'ControllerName@functionToUse');`
+```
+$core->get('your/preferred/url', 'ControllerName@functionToUse');
+```
 
 If you want to submit a POST request to the same page, use:
-`$core->post('same/URL/as/GET', 'ControllerName@functionToUse');`
+```
+$core->post('same/URL/as/GET', 'ControllerName@functionToUse');
+```
 
 If you want to submit a POST request and redirect to another page, use:
-`$core->post('URL/you/want/to/redirect/to', 'ControllerName@functionToUse');`
+```
+$core->post('URL/you/want/to/redirect/to', 'ControllerName@functionToUse');
+```
 
 ### Models
 Model are the classes that access the database. This is usually where the query statements are. These classes are found at *app/models* directory For the Model classes to have access to the database, it must extend to *app/libraries/Model.php*
@@ -62,22 +68,37 @@ Controllers are the middleman between the views and models. They perform the nec
 ----------------------------------------------------------------
 ## PROGRESS
 ### Front End: 0%
-#### Users
-- [] Prototype
-- [] CSS (Responsive)
-- [] JS
+#### Prototype
+ - [x] landing page
+ - [x] login page
+ - [x] register page
+ - [x] home page (guest)
+ - [x] home page (user)
+ - [x] timeline page (user)
+ - [ ] edit post (user)
+ - [ ] profile page 
+ - [ ] dashboard (admin)
+ - [ ] user-list (admin)
+ - [ ] user-edit (admin)
+ - [ ] post-list (admin)
+ - [ ] post-edit (admin)
 
-#### Posts
-- [] Prototype
-- [] CSS (Responsive)
-- [] JS
+#### Coded
+ - [ ] landing page
+ - [ ] login page
+ - [ ] register page
+ - [ ] home page (guest)
+ - [ ] home page (user)
+ - [ ] timeline page (user)
+ - [ ] edit post (user)
+ - [ ] profile page 
+ - [ ] dashboard (admin)
+ - [ ] user-list (admin)
+ - [ ] user-edit (admin)
+ - [ ] post-list (admin)
+ - [ ] post-edit (admin)
 
-#### Comments
-- [] Prototype
-- [] CSS (Responsive)
-- [] JS
-
-### Back End: 43.75%
+### Back End: 56.25%
 #### Users
 - [x] Create (Register)
 - [x] Read all
@@ -87,17 +108,20 @@ Controllers are the middleman between the views and models. They perform the nec
 - [x] Delete user
 
 #### Posts
-- [] Create
+- [x] Create
 - [x] Read all
-- [] Read one
-- [] Update post
-- [] Delete post
+- [x] Read one
+- [ ] Update post
+- [ ] Delete post
 
 #### Comments
-- [] Create
-- [] Read all
-- [] Read one
-- [] Update post
-- [] Delete post
+- [ ] Create
+- [ ] Read all
+- [ ] Read one
+- [ ] Update post
+- [ ] Delete post
+
+#### CHANGES TO APPLY
+- [ ] Insert AVATAR and CREATED_AT column in users table
 
 

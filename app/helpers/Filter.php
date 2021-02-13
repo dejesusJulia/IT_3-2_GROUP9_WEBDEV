@@ -47,10 +47,14 @@ class Filter{
                     }
                     $this->errors[$key]['errors'] = [$cpErr];
                     break;
-
+                
+                case 'img':
+                    $this->errors[$key]['errors'] = [$this->imageFilter($value)];
+                    break; 
+                
                 default:
-                    // code
-                    break;
+                // code
+                break;
             }
         }
         return $this->errors;
@@ -126,11 +130,33 @@ class Filter{
     // VALIDATION FOR IMAGES
     public function imageFilter($img){
         $error = '';
-        $extensions = ['.jpeg', '.jpg', '.png'];
-        if(!in_array($img, $extensions)){
-            $error = 'This file format is not valid';
+        $maxsize = 2097152;
+        // allowed extensions
+        $extensions = ['image/jpeg', 'image/jpg', 'image/png'];
+
+        if($img !== ''){
+            // dissect image filename
+            $imgArr = explode(':', $img);
+            if(!in_array($imgArr[0], $extensions)){
+                $error = 'This file format is not valid';
+            
+            }else if(intval($imgArr[1]) > $maxsize){
+                $error = 'File is too big';
+            }else if(intval($imgArr[2]) > 0){
+                $error = 'File upload error';
+            }
         }
+        
         return $error;
+    }
+
+    // UPLOAD IMAGE
+    public function imageUpload($tempName, $extension){
+        $newName = uniqid('', true) . "." . $extension;
+        $newDestination = "../public/img/" . $newName;
+        move_uploaded_file($tempName, $newDestination);
+
+        return $newDestination;
     }
 
     // ERROR COUNTER

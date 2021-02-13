@@ -13,22 +13,24 @@ class Post extends Model{
     ];
     protected $table = 'posts';
 
-    // SELECT ALL POSTS
+    # SELECT ALL POSTS
     public function all(){
         $posts = $this->selectAll($this->table);
         return $posts;
     }
-    
-    public function getOne($value){
-        $this->colName = $this->columns[0];
-        $post = $this->selectOne($this->table, $this->colName, $value);
+
+    # SELECT POST BY POST_ID
+    public function getPost($postId){
+        $this->colName = 'post_id';
+        $post = $this->selectOne($this->table, $this->colName, $postId);
         return $post;
     }
 
-    public function getPost($value){
-        $this->colName = 'post_id';
-        $post = $this->selectOne($this->table, $this->colName, $value);
-        return $post;
+    # SELECT POST BY USER_ID
+    public function getUserPost($userId){
+        $this->colName = 'user_id';
+        $posts = $this->selectMany($this->table, $this->colName, $userId);
+        return $posts;
     }
 
     # INSERT SINGLE POST W/O IMG

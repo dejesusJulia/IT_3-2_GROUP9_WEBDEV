@@ -24,21 +24,49 @@ class Pages extends Controller{
 
     # HOME PAGE
     public function home(){
+        session_start();
         $posts = $this->postModel->joinUserPost();
-        $this->view('home', $posts);
+        $data = ['posts' => $posts];
+        $this->view('home', $data);
     }
 
     # DEFAULT USER TIMELINE
-    public function defaultHome(){
+    public function userTimeline($i){
         session_start();
-        $this->view('users/timeline');
+        $posts = $this->postModel->getUserPost($i);
+        $this->view('users/timeline', $posts);
     }
 
     # REDIRECT HOME FOR USER
     public function userHome(){
-        $this->view('home');
+        session_start();
+
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'admin'){
+            header('Location: ../admin/home');
+            die();
+        }
+        $posts = $this->postModel->joinUserPost();
+        $data = ['posts' => $posts];
+        $this->view('home', $data);
     }
 
+    # USER PAGES - EDIT POST
+    public function editPost($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'admin'){
+            header('Location: ../admin/home');
+            die();
+        }
+        $post = $this->postModel->getPost($i);
+        $this->view('users/edit-post', $post);
+    }
+    
     # REDIRECT HOME FOR ADMIN
     public function adminHome(){
         $this->view('home');
