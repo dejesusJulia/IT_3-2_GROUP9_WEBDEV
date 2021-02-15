@@ -1,29 +1,59 @@
 <?php
-session_start();
-if($_SESSION['user_type'] == 'admin'){
+if($_SESSION['user']['user_type'] == 'admin'){
     include_once '../app/views/includes/dash.php';
-}else if($_SESSION['user_type'] == 'user'){
+}else if($_SESSION['user']['user_type'] == 'user'){
     include_once '../app/views/includes/header.php';
 }else{
     header('Location: home');
+    die();
+}
+$male = 'img/avatar/male_avatar.png';
+$female = 'img/avatar/female_avatar.png';
+$maleAttr = '';
+$femaleAttr = '';
+if($data['data']->avatar == $male){
+    $maleAttr = 'checked';
+}else{
+    $femaleAttr = 'checked';
 }
 ?>
-    <h1>Hey</h1>
-    <h2><?php echo $data['message'] ?? '';?></h2>
-    <form action="profile?<?php echo $data['data']->user_id;?>" method="post" novalidate>
-        <input type="text" name="username" id="username" value="<?php echo $data['data']->username ?? $_POST['username'];?>"><br>
-        <small>
-        <?php echo $data['username']['errors']['0'] ?? '';?>
-        </small>
-        <br>
+    <div class="container mx-auto">
+        <div class="col-6 offset-3">
+        <h2><?php echo $data['message'] ?? '';?></h2>
+            <form action="profile?<?php echo $data['data']->user_id;?>" method="post" novalidate>
+                <div class="form-group">
+                    <input type="text" name="username" id="username" value="<?php echo $data['data']->username ?? $_POST['username'];?>" class="form-control">
+                    <small>
+                    <?php echo $data['username']['errors']['0'] ?? '';?>
+                    </small>
+                </div>               
+                
+                <div class="form-group">
+                    <input type="email" name="user_email" id="email" value="<?php echo $data['data']->user_email ?? $_POST['user_email'];?>" class="form-control">
+                    <small>
+                    <?php echo $data['user_email']['errors']['0'] ?? '';?>
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="male" name="avatar" class="custom-control-input" name="male" value="<?php echo $male;?>" <?php echo $maleAttr;?>>
 
-        <input type="email" name="user_email" id="email" value="<?php echo $data['data']->user_email ?? $_POST['user_email'];?>"><br>
-        <small>
-        <?php echo $data['user_email']['errors']['0'] ?? '';?>
-        </small>
-        <br>
-        <input type="submit" value="Update" name="update">
-    </form>
+                        <label class="custom-control-label" for="male"><img src="<?php echo $male;?>" alt="..." style="width: 25px;">Male</label>
+                    </div>
 
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="female" name="avatar" class="custom-control-input" value="<?php echo $female;?>" <?php echo $femaleAttr;?>>
+
+                        <label class="custom-control-label" for="female"><img src="<?php echo $female;?>" alt="..." style="width: 25px;">Female</label>
+                    </div>
+                </div>
+                
+                <input type="submit" value="Update" name="update">
+            </form>
+        </div>
+    </div>
+    
+    
 </body>
 </html>

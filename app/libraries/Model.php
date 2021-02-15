@@ -47,7 +47,7 @@ class Model{
 
     # JOIN USERS AND POSTS TABLE
     public function joinUserPost(){
-        $this->db->query("SELECT posts.body, posts.img, posts.show_author, posts.created_at, users.username FROM posts, users WHERE posts.user_id = users.user_id ORDER BY created_at DESC");
+        $this->db->query("SELECT posts.post_id, posts.body, posts.img, posts.show_author, posts.created_at, users.username FROM posts, users WHERE posts.user_id = users.user_id ORDER BY created_at DESC");
         $result = $this->db->resultSet();
 
         return $result;

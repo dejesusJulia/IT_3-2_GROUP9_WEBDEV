@@ -39,21 +39,22 @@ $core->get('user/home', 'Pages@userHome');
 $core->post('user/home', 'Posts@addPost');
 $core->get('user/edit-post', 'Pages@editPost');
 $core->post('user/edit-post', 'Posts@updatePost');
+$core->post('user/post-delete', 'Posts@postDestroy');
 
 #ADMIN
 $core->get('admin/dashboard', 'Pages@dash');
 $core->get('admin/home', 'Pages@adminHome');
 
 $core->get('admin/user-list', 'Pages@userList');
-$core->get('admin/user-edit', 'Users@editUserType');
+$core->get('admin/user-edit', 'Pages@editUserType');
 $core->post('admin/user-edit', 'Users@updateUserTypes');
 $core->post('admin/user-delete', 'Users@userDestroy');
 
 $core->get('admin/post-list', 'Pages@postList');
 $core->get('admin/post-view', 'Pages@postView');
 
-#SHARED PAGE
-$core->get('profile', 'Users@profile');
+#SHARED PAGES
+$core->get('profile', 'Pages@profile');
 $core->post('profile', 'Users@updateProfile');
 
 # ACTIVATE ROUTES

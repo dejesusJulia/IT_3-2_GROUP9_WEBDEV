@@ -6,33 +6,6 @@ class Users extends Controller{
         $this->userModel = $this->model('User');
     }
 
-    # PROFILE PAGE
-    public function profile($i){
-        $data['data'] = $this->userModel->getUser($i);
-
-        $this->view('profile', $data);
-    }
-
-    # UPDATE USER TYPE GET REQUEST
-    public function editUserType($i){
-        session_start();
-        if(!isset($_SESSION['user']['user_type'])){
-            header('Location: home');
-            die();
-        }else if($_SESSION['user']['user_type'] == 'user'){
-            header('Location: ../user/home');
-            die();
-        }
-        $user = $this->userModel->getUser($i);
-        $data = [
-            'userData' => $user,
-            'user' => 'user',
-            'admin' => 'admin',
-            
-        ];
-        $this->view('admins/user-edit', $data);
-    }
-
     # LOGIN POST
     public function login(){
         $errors = $this->userModel->loginErrors();
@@ -95,6 +68,7 @@ class Users extends Controller{
             $data = $_POST;
             array_pop($data);
             $keys = array_keys($data);
+            // var_dump($data);
 
             // FILTER
             $errors = $this->filter()->userFilter($data, $errors);
@@ -157,6 +131,7 @@ class Users extends Controller{
         $this->view('admins/user-edit', $data);
     }
 
+    # DELETE USER
     public function userDestroy($i){
         session_start();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){

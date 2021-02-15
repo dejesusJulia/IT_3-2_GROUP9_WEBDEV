@@ -1,5 +1,5 @@
 <?php 
-/* CONTROLS ALL VIEWS WITHOUT POST REQUEST*/
+/* CONTROLS ALL VIEWS ON GET REQUEST*/
 class Pages extends Controller{
     public function __construct()
     {
@@ -120,7 +120,35 @@ class Pages extends Controller{
         }
         $users = $this->userModel->all();
         $this->view('admins/user-list', $users);
-    }    
+    }  
+
+    # UPDATE USER TYPE GET REQUEST
+    public function editUserType($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $user = $this->userModel->getUser($i);
+        $data = [
+            'userData' => $user,
+            'user' => 'user',
+            'admin' => 'admin',
+            
+        ];
+        $this->view('admins/user-edit', $data);
+    }
+    
+    # PROFILE PAGE
+    public function profile($i){
+        session_start();
+        $data['data'] = $this->userModel->getUser($i);
+    
+        $this->view('profile', $data);
+    }
 
     # LOG OUT
     public function logout(){

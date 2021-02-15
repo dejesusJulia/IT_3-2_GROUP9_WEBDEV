@@ -56,9 +56,13 @@ class Post extends Model{
 
     # DELETE POST
     public function deletePost($post){
+        $msg = false;
         $this->db->query('DELETE FROM ' . $this->table . ' WHERE post_id = :post_id');
         $this->db->bind(':post_id', $post);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
     }
 
     # UPDATE POST

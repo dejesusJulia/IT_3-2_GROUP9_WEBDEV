@@ -6,7 +6,7 @@ class User extends Model{
     public $colName;
     public $inputs = [];
     protected $columns = [
-        'username', 'user_email', 'password', 'confirmPassword'
+        'username', 'user_email', 'password', 'confirmPassword', 'avatar'
     ];
     protected $nullable = [
         'user_type' => 'user'
@@ -37,22 +37,24 @@ class User extends Model{
     public function insertOne($user){
         $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
 
-        $this->db->query('INSERT INTO ' . $this->table . '(username, user_email, user_type, password) VALUES(:username, :user_email, :user_type, :password)');
+        $this->db->query('INSERT INTO ' . $this->table . '(username, user_email, user_type, password, avatar) VALUES(:username, :user_email, :user_type, :password, :avatar)');
 
         $this->db->bind(":username", filter_var($user['username'], FILTER_SANITIZE_STRING));
         $this->db->bind(":user_email", $user['user_email']);
         $this->db->bind(":user_type", $this->nullable['user_type']);
         $this->db->bind(":password", $user['password']);
+        $this->db->bind(":avatar", $user['avatar']);
         $this->db->executes();
 
     }
 
     # UPDATE PROFILE
     public function updateSelf($user){
-        $this->db->query('UPDATE ' . $this->table . ' SET username=:username, user_email=:user_email WHERE user_id =:user_id');
+        $this->db->query('UPDATE ' . $this->table . ' SET username=:username, user_email=:user_email, avatar = :avatar WHERE user_id =:user_id');
 
         $this->db->bind(":username", $user['username']);
         $this->db->bind(":user_email", $user['user_email']);
+        $this->db->bind(":avatar", $user['avatar']);
         $this->db->bind(":user_id", $user['user_id']);
         $this->db->executes();
     }

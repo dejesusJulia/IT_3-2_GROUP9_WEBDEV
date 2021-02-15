@@ -6,7 +6,7 @@
         </div>
 
         <div>
-            <input type="file" name="img" id="img" value="<?php echo $data->img;?>">
+            <input type="file" name="img" id="img">
         </div>
 
         <input type="hidden" name="user_id" value="<?php echo $data->user_id;?>">

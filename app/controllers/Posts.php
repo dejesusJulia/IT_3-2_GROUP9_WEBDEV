@@ -68,11 +68,49 @@ class Posts extends Controller{
     }
 
     public function updatePost($i){
-        
+        $oldPost = $this->postModel->getPost($i);
+        $errors = $this->postModel->postErrors();
+        $img = [];
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $toFilter = [
+                'body' => $_POST['body']
+            ];
+            if($_FILES['img']['name'] !== ''){
+                // FILTER FILE TYPE, SIZE, AND UPLOAD ERROR
+                $img['typeSizeError'] = $_FILES['img']['type'] . ':' . strval($_FILES['img']['size']) . ':' .strval($_FILES['img']['error']);
+                // SAVE TEMP NAME
+                $img['tmp'] = $_FILES['img']['tmp_name'];
+                // GET EXTENSION
+                $getExt = explode('.', $_FILES['img']['name']);
+                $img['ext'] = end($getExt);
+            }
+            $data = $_POST;
+            $files = $_FILES;
+            echo '<pre>';
+            var_dump($data);
+            echo '</pre>';
+
+            echo '<pre>';
+            var_dump($files);
+            echo '</pre>';
+        }
     }
 
-    public function deletePost($i){
-
+    public function postDestroy($i){
+        session_start();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            if($this->postModel->deletePost($i)){
+                $_SESSION['successMsg'] = 'Post deleted';
+                header('Location: ../user/timeline?'.$_SESSION['user']['user_id']);
+                die();
+            }else{
+                $_SESSION['errorMsg'] = 'User not deleted';
+                header('Location: ../user/timeline?');
+                die();
+            }
+        }
     }
     
 

@@ -51,7 +51,7 @@ include_once '../app/views/includes/dash.php';
                     <td><?php echo $col->user_email;?></td>
                     <td><?php echo $col->user_type;?></td>
                     <td>
-                        <a href="profile?<?php echo $col->user_id;?>">Edit profile</a>
+                        <a href="../profile?<?php echo $col->user_id;?>">Edit profile</a>
                     </td>
                 </tr>
                 <?php

@@ -21,12 +21,26 @@
                 <?php if(!isset($_SESSION['user']['user_type'])):?>
                     <li><a href="login">Login</a></li>
                     <li><a href="register">Register</a></li>
+                    
                 <?php elseif($_SESSION['user']['user_type'] == 'user'):?>
-                    <li><a href="../user/timeline?<?php echo $_SESSION['user']['user_id'];?>">Timeline</a></li>
-                    <li><a href="../index">Logout</a></li>
+                    <li>
+                        <a href="../user/timeline?<?php echo $_SESSION['user']['user_id'];?>">Timeline</a>
+                    </li>
+                    <li>
+                        <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
+                    </li>
+                    <li>
+                        <a href="index">Logout</a>
+                    </li>
+
                 <?php elseif($_SESSION['user']['user_type'] == 'admin'):?>
-                    <li><a href="../admin/dashboard">Dashboard</a></li>
-                    <li><a href="../index">Logout</a></li>
+                    <li>
+                    <a href="../admin/dashboard">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
+                    </li>
+                    <li><a href="index">Logout</a></li>
                 <?php endif;?>
             </ul>            
         </nav>

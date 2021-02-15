@@ -3,12 +3,10 @@
 class Filter{
 
     public array $requestData = [];
-    // public array $requestPost = [];
     public array $errorData = [];
     public string $email = '';
     public string $match = '';
     public array $errors = [];
-    // public array $postErrors = [];
     public string $err = '';
 
     // FILTER FOR USERS INPUT
@@ -47,14 +45,11 @@ class Filter{
                     }
                     $this->errors[$key]['errors'] = [$cpErr];
                     break;
-                
-                case 'img':
-                    $this->errors[$key]['errors'] = [$this->imageFilter($value)];
+
+                case 'avatar': 
+                    $avatar = '';
+                    $this->errors[$key]['errors'] = [$avatar];
                     break; 
-                
-                default:
-                // code
-                break;
             }
         }
         return $this->errors;
