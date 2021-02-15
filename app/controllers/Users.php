@@ -76,9 +76,13 @@ class Users extends Controller{
             
             // IF THERE ARE NO ERRORS IN FILTER
             if($ctr == 0){
-                $this->userModel->insertOne($data); // INSERT DATA              
-                $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
-                    
+                $unique = $this->userModel->getOne($data['user_email']);
+                if($unique !== null){
+                    $errors['message'] = '<p>Email is taken. Please enter a new email.</p>';
+                }else{
+                    $this->userModel->insertOne($data); // INSERT DATA              
+                    $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
+                }    
             }
         }
         $this->view('auth/register', $errors);

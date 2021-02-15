@@ -51,13 +51,20 @@
                         
                         <p><?php echo $post->body;?></p>
                         <small><?php echo $post->created_at;?></small>
+                        <?php if(isset($_SESSION['user']['user_type'])):?>
+                        <p>
+                            <small>
+                                <a href="<?php echo '../' . $_SESSION['user']['user_type'] . '/comment' . $post->post_id;?>">Comment</a>
+                            </small>
+                        </p>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>
         </div>
         <?php endforeach;?>
 
-    </section>
-    
+    </section>   
+     
 </body>
 </html>

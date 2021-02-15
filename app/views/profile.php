@@ -1,22 +1,4 @@
-<?php
-if($_SESSION['user']['user_type'] == 'admin'){
-    include_once '../app/views/includes/dash.php';
-}else if($_SESSION['user']['user_type'] == 'user'){
-    include_once '../app/views/includes/header.php';
-}else{
-    header('Location: home');
-    die();
-}
-$male = 'img/avatar/male_avatar.png';
-$female = 'img/avatar/female_avatar.png';
-$maleAttr = '';
-$femaleAttr = '';
-if($data['data']->avatar == $male){
-    $maleAttr = 'checked';
-}else{
-    $femaleAttr = 'checked';
-}
-?>
+<?php include_once '../app/views/includes/profile-header.php';?>
     <div class="container mx-auto">
         <div class="col-6 offset-3">
         <h2><?php echo $data['message'] ?? '';?></h2>

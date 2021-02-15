@@ -69,7 +69,18 @@ class Pages extends Controller{
     
     # REDIRECT HOME FOR ADMIN
     public function adminHome(){
-        $this->view('home');
+        session_start();
+
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $posts = $this->postModel->joinUserPost();
+        $data = ['posts' => $posts];
+        $this->view('home', $data);
     }
 
     # ADMIN DASHBOARD/HOME
@@ -140,6 +151,39 @@ class Pages extends Controller{
             
         ];
         $this->view('admins/user-edit', $data);
+    }
+
+    # USER PAGES - COMMENT PAGE
+    public function userComment($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'admin'){
+            header('Location: ../admin/home');
+            die();
+        }
+        $data = [
+            'postId' => $i
+        ];
+        $this->view('comment', $data);
+    }
+
+    # ADMIN PAGES - COMMENT PAGE
+    public function adminComment($i){
+        // add comment
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $data = [
+            'postId' => $i
+        ];
+        $this->view('comment', $data);
     }
     
     # PROFILE PAGE

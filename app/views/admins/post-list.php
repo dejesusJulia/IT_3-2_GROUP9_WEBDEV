@@ -9,6 +9,7 @@ include_once '../app/views/includes/dash.php';
                 <th>ID</th>
                 <th>BODY</th>
                 <th>AUTHOR</th>
+                <th>CREATED AT</th>
                 <th>MODIFY</th>
             </thead>
 
@@ -20,6 +21,7 @@ include_once '../app/views/includes/dash.php';
                     <td><?php echo $col->post_id?></td>
                     <td><?php echo $col->body?></td>
                     <td><?php echo $col->show_author == false ? 'anonymous' : $col->username ;?></td>
+                    <td><?php echo $col->created_at;?></td>
 
                     <td>
                         <a href="post-view?<?php echo $col->post_id;?>">View</a>

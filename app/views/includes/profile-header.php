@@ -1,3 +1,23 @@
+<?php
+$home = '';
+if($_SESSION['user']['user_type'] == 'admin'){
+    $home = 'admin/home';
+}else if($_SESSION['user']['user_type'] == 'user'){
+    $home = 'user/home';
+}else{
+    header('Location: home');
+    die();
+}
+$male = 'img/avatar/male_avatar.png';
+$female = 'img/avatar/female_avatar.png';
+$maleAttr = '';
+$femaleAttr = '';
+if($data['data']->avatar == $male){
+    $maleAttr = 'checked';
+}else{
+    $femaleAttr = 'checked';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,33 +35,25 @@
         <nav>  
             <ul>
                 <li>
-                    <a href="home">Home</a>
+                    <a href="<?php echo $home;?>">Home</a>
                 </li>
 
-                <?php if(!isset($_SESSION['user']['user_type'])):?>
-                    <li><a href="login">Login</a></li>
-                    <li><a href="register">Register</a></li>
-                    
-                <?php elseif($_SESSION['user']['user_type'] == 'user'):?>
-                    <li>
-                        <a href="../user/timeline?<?php echo $_SESSION['user']['user_id'];?>">Timeline</a>
-                    </li>
-                    <li>
-                        <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
-                    </li>
-                    <li>
-                        <a href="../index">Logout</a>
-                    </li>
-
+                <?php if($_SESSION['user']['user_type'] == 'user'):?>
+                <li>
+                    <a href="user/timeline?<?php echo $_SESSION['user']['user_id'];?>">Timeline</a>
+                </li>
+                <li>
+                    <a href="profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
+                </li>
                 <?php elseif($_SESSION['user']['user_type'] == 'admin'):?>
-                    <li>
-                    <a href="../admin/dashboard">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
-                    </li>
-                    <li><a href="index">Logout</a></li>
+                <li>
+                    <a href="admin/dashboard">Dashboard</a>
+                </li>    
                 <?php endif;?>
+
+                <li>
+                    <a href="index">Logout</a>
+                </li>
             </ul>            
         </nav>
     </header>
