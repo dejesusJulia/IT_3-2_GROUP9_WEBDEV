@@ -1,6 +1,6 @@
 <?php include_once '../app/views/includes/timeline-header.php';?>
     
-    <form action="../user/edit-post" method="post" enctype="multipart/form-data">
+    <form action="../user/edit-post?<?php echo $data->post_id;?>" method="post" enctype="multipart/form-data">
         <div>
             <textarea name="body" id="body" cols="30" rows="10" placeholder="body"><?php echo $data->body;?></textarea>
         </div>

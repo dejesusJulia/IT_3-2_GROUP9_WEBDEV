@@ -65,12 +65,23 @@ class Post extends Model{
         return $msg;
     }
 
-    # UPDATE POST
-    public function updateSelf($post){
-        $this->db->query('UPDATE ' . $this->table . ' SET body=:body, img=:img WHERE post_id =:post_id');
+    # UPDATE POST IWTH IMAGE
+    public function updateWithImage($post){
+        $this->db->query('UPDATE ' . $this->table . ' SET body=:body, img=:img, show_author=:show_author WHERE post_id =:post_id');
 
         $this->db->bind(":body", $post['body']);
         $this->db->bind(":img", $post['img']);
+        $this->db->bind(":show_author", $post['show_author']);
+        $this->db->bind(":post_id", $post['post_id']);
+        $this->db->executes();
+    }
+
+    # UPDATE POST WITHOUT IMAGE
+    public function updateNoImage($post){
+        $this->db->query('UPDATE ' . $this->table . ' SET body=:body, show_author=:show_author WHERE post_id =:post_id');
+
+        $this->db->bind(":body", $post['body']);
+        $this->db->bind(":show_author", $post['show_author']);
         $this->db->bind(":post_id", $post['post_id']);
         $this->db->executes();
     }

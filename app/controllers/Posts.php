@@ -70,10 +70,10 @@ class Posts extends Controller{
     public function updatePost($i){
         $oldPost = $this->postModel->getPost($i);
         $errors = $this->postModel->postErrors();
-        $img = [];
-
+        
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+            $img = [];
+            $showAuthor = $_POST['show_author'] == 'on' ? true : false;
             $toFilter = [
                 'body' => $_POST['body']
             ];
@@ -85,17 +85,37 @@ class Posts extends Controller{
                 // GET EXTENSION
                 $getExt = explode('.', $_FILES['img']['name']);
                 $img['ext'] = end($getExt);
+                // ADD TO FILTER
+                $toFilter['img'] = $img['typeSizeError'];
             }
-            $data = $_POST;
-            $files = $_FILES;
-            echo '<pre>';
-            var_dump($data);
-            echo '</pre>';
+            $keys = array_keys($toFilter);
 
-            echo '<pre>';
-            var_dump($files);
-            echo '</pre>';
+            // CALL FILTER FUNCTION
+            $errors = $this->filter()->postFilter($toFilter, $errors);
+            $ctr = $this->filter()->errorCounter($errors, $keys);
+            echo $i;
+            if($ctr == 0){
+                $post = [
+                    'body' => filter_var($_POST['body'], FILTER_SANITIZE_STRING),
+                    'show_author' => $showAuthor,
+                    'post_id' => $i
+                ];
+
+                if($_FILES['img']['name'] !== ''){
+                    $imgLoc = $this->filter()->imageReplace([$img['tmp'], $img['ext']], $oldPost->avatar);
+                    // ADD TO POST 
+                    $post['img'] = $imgLoc;
+                    // INSERT DATA W/ IMAGE TO TABLE 
+                    $this->postModel->updateWithImage($post);
+                }else{
+                    // INSERT DATA W/O TO TABLE
+                    $this->postModel->updateNoImage($post);
+                }
+                header('Location: ../user/edit-post?'.$i); 
+                die();
+            }
         }
+        $this->view('users/edit-post', $errors);
     }
 
     public function postDestroy($i){

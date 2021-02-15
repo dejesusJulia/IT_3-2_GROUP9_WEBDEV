@@ -38,7 +38,7 @@ class Model{
     protected function selectMany($table, $columnName, $value){
         $this->tbl = $table;
         $this->columnName = $columnName;
-        $this->db->query("SELECT * FROM $this->tbl WHERE $this->columnName " . "=:$this->columnName");
+        $this->db->query("SELECT * FROM $this->tbl WHERE $this->columnName " . "=:$this->columnName ORDER BY created_at DESC");
         $this->db->bind(":$this->columnName", $value);
         $results = $this->db->resultSet();
 

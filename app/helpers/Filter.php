@@ -148,10 +148,26 @@ class Filter{
     // UPLOAD IMAGE
     public function imageUpload($tempName, $extension){
         $newName = uniqid('', true) . "." . $extension;
-        $newDestination = "../public/img/" . $newName;
+        $newDestination = "../public/img/posts/" . $newName;
         move_uploaded_file($tempName, $newDestination);
 
         return $newDestination;
+    }
+
+    // REPLACE IMAGE
+    public function imageReplace($newImg, $oldImg){
+        $msg = '';
+        if($oldImg !== null){
+            $oldImg = str_replace('../public/', '', $oldImg);
+            if(!unlink($oldImg)){
+                $msg = 'error in deleting old image';
+            }else{
+                $msg = $this->imageUpload($newImg[0], $newImg[1]);
+            }
+        }else{
+            $msg = $this->imageUpload($newImg[0], $newImg[1]);
+        }
+        return $msg;
     }
 
     // ERROR COUNTER

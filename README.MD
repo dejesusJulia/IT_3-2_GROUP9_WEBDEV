@@ -98,7 +98,7 @@ Controllers are the middleman between the views and models. They perform the nec
  - [ ] post-list (admin)
  - [ ] post-edit (admin)
 
-### Back End: 62.50%
+### Back End: 68.75%
 #### Users
 - [x] Create (Register)
 - [x] Read all
@@ -111,7 +111,7 @@ Controllers are the middleman between the views and models. They perform the nec
 - [x] Create
 - [x] Read all
 - [x] Read one
-- [ ] Update post
+- [x] Update post
 - [x] Delete post
 
 #### Comments
