@@ -102,7 +102,7 @@ class Posts extends Controller{
                 ];
 
                 if($_FILES['img']['name'] !== ''){
-                    $imgLoc = $this->filter()->imageReplace([$img['tmp'], $img['ext']], $oldPost->avatar);
+                    $imgLoc = $this->filter()->imageReplace([$img['tmp'], $img['ext']], $oldPost->img);
                     // ADD TO POST 
                     $post['img'] = $imgLoc;
                     // INSERT DATA W/ IMAGE TO TABLE 

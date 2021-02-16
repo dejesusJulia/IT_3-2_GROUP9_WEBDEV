@@ -65,6 +65,11 @@
         <?php endforeach;?>
 
     </section>   
-     
+
+    <?php foreach($data['posts'] as $img):?>
+        <pre>
+        <?php var_dump($img);?>
+        </pre>
+    <?php endforeach;?>
 </body>
 </html>

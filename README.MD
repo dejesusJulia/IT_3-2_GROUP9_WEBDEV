@@ -124,7 +124,7 @@ Controllers are the middleman between the views and models. They perform the nec
 #### CHANGES TO APPLY
 - [x] Insert AVATAR and CREATED_AT column in users table
 - [x] Make each user email unique 
-- [ ] Unlink unused images (replaced by udpate)
+- [X] Unlink unused images (replaced by udpate)
 - [ ] Refactor functions for cleaner code 
 
 
