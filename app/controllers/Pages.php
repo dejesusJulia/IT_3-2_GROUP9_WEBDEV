@@ -164,6 +164,7 @@ class Pages extends Controller{
             header('Location: ../admin/home');
             die();
         }
+        
         $data = [
             'postId' => $i
         ];

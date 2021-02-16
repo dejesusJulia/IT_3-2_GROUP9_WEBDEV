@@ -7,11 +7,12 @@
             <div class="card">
                 <div class="card-body">
                     <div class="media">
-                        <img src="<?php echo $post->img;?>" alt="..." class="mr-3" style="width: 100px;">
+                        <img src="../public/<?php echo $_SESSION['user']['avatar'];?>" alt="..." class="mr-3" style="width: 100px;">
                         <div class="media-body">
                             <h5 class="mt-0"><?php echo $post->show_author == false ? 'Anonymous' : $_SESSION['user']['username'];?></h5>
                             
                             <p><?php echo $post->body;?></p>
+                            <img src="<?php echo $post->img;?>" alt="..." class="mr-3" style="width: 100px;">
                             <small><?php echo $post->created_at;?></small>
 
                             <small>

@@ -43,7 +43,8 @@ class Users extends Controller{
                         $_SESSION['user'] = [
                             'user_type' => $email->user_type,
                             'user_id' => $email->user_id,
-                            'username' => $email->username
+                            'username' => $email->username,
+                            'avatar' => $email->avatar
                         ];
                         header("Location: $auth");
                         exit();

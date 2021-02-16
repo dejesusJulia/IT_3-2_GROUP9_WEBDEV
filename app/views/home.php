@@ -44,13 +44,21 @@
         <?php foreach($data['posts'] as $post):?>
         <div class="card">
             <div class="card-body">
+
                 <div class="media">
-                    <img src="<?php echo $post->img ?? ''?>" class="mr-3" alt="..." style="width:100px;">
+                    <img src="../public/<?php echo $post->avatar ?? ''?>" class="mr-3" alt="asd" style="width:100px;">
                     <div class="media-body">
                         <h5 class="mt-0"><?php echo $post->show_author == false ? 'Anonymous' : $post->username?></h5>
                         
                         <p><?php echo $post->body;?></p>
+
+                        <?php if($post->img !== null):?>
+                        <img src="<?php echo $post->img ?? ''?>" class="mr-3" alt="..." style="width:100px;">
+                        <?php endif;?>
+
+
                         <small><?php echo $post->created_at;?></small>
+
                         <?php if(isset($_SESSION['user']['user_type'])):?>
                         <p>
                             <small>
@@ -63,13 +71,6 @@
             </div>
         </div>
         <?php endforeach;?>
-
     </section>   
-
-    <?php foreach($data['posts'] as $img):?>
-        <pre>
-        <?php var_dump($img);?>
-        </pre>
-    <?php endforeach;?>
 </body>
 </html>

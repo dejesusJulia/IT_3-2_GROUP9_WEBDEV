@@ -45,15 +45,47 @@ class Model{
         return $results;
     }
 
-    # JOIN USERS AND POSTS TABLE
+    # JOIN USERS AND POSTS TABLE (MULTIPLE ROWS)
     public function joinUserPost(){
-        $this->db->query("SELECT posts.post_id, posts.body, posts.img, posts.show_author, posts.created_at, users.username FROM posts, users WHERE posts.user_id = users.user_id ORDER BY created_at DESC");
+        $this->db->query("SELECT 
+        p.post_id, 
+        p.body, 
+        p.img, 
+        p.show_author, 
+        p.created_at, 
+        u.username, 
+        u.avatar 
+        FROM posts p INNER JOIN users u
+        ON p.user_id = u.user_id 
+        ORDER BY created_at DESC");
         $result = $this->db->resultSet();
 
         return $result;
     }
+
+    # JOIN USERS AND POSTS TABLE (SINGLE ROW)
+    // public function joinUserPostSingle($postId){
+    //     $this->db->query("SELECT 
+    //     p.post_id, 
+    //     p.body, 
+    //     p.img, 
+    //     p.show_author, 
+    //     p.created_at, 
+    //     u.username, 
+    //     u.avatar 
+    //     FROM posts p INNER JOIN users u
+    //     ON p.user_id = u.user_id
+    //     INNER JOIN(
+    //         SELECT username
+    //         FROM users
+    //         WHERE user_id
+    //     )
+    //     ");
+    //     $result = $this->db->resultSingle();
+    //     return $result;
+    // }
     
-    // SET UP ERROR HANDLER
+    # SET UP ERROR HANDLER
     public function errorHandler($columns){
         $this->inputHandler = array_fill_keys($columns, [
             'errors' => []
