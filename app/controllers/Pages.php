@@ -5,6 +5,7 @@ class Pages extends Controller{
     {
         $this->postModel = $this->model('Post');
         $this->userModel = $this->model('User');
+        $this->commentModel = $this->model('Comment');
     }
 
     # LANDING PAGE

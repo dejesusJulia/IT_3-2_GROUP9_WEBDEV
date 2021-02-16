@@ -13,5 +13,6 @@
 <body>
     <h1>Welcome, user!</h1>
     <a href="../user/home">Home</a>
-    <a href="../user/publish">Publish</a>
+    <a href="../user/timeline">Timeline</a>
+    <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>">Profile</a>
     <a href="../index">Logout</a>
