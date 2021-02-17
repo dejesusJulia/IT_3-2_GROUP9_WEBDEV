@@ -78,6 +78,22 @@ class Model{
         $result = $this->db->resultSingle();
         return $result;
     }
+
+    # JOIN USERS AND COMMENTS TABLE OF A CERTAIN POST
+    public function joinUserCommentsOfPost($postId){
+        $this->db->query('SELECT
+        c.comment_id,
+        c.comment_body, 
+        c.created_at, 
+        u.username, 
+        u.avatar
+         FROM comments c 
+         INNER JOIN users u USING (user_id) 
+         WHERE post_id =:post_id');
+        $this->db->bind(':post_id', $postId);
+        $results = $this->db->resultSet();
+        return $results;
+    }
     
     # SET UP ERROR HANDLER
     public function errorHandler($columns){

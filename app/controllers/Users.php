@@ -69,7 +69,6 @@ class Users extends Controller{
             $data = $_POST;
             array_pop($data);
             $keys = array_keys($data);
-            // var_dump($data);
 
             // FILTER
             $errors = $this->filter()->inputFilter($data, $errors);
@@ -78,12 +77,15 @@ class Users extends Controller{
             // IF THERE ARE NO ERRORS IN FILTER
             if($ctr == 0){
                 $unique = $this->userModel->getOne($data['user_email']);
-                if($unique !== null){
+                if($unique !== false){
                     $errors['message'] = '<p>Email is taken. Please enter a new email.</p>';
                 }else{
                     $this->userModel->insertOne($data); // INSERT DATA              
                     $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
-                }    
+                }   
+                // $this->userModel->insertOne($data); // INSERT DATA              
+                // $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
+                // var_dump($unique);
             }
         }
         $this->view('auth/register', $errors);
@@ -92,7 +94,8 @@ class Users extends Controller{
 
     # UPDATE PROFILE
     public function updateProfile($i){
-        $errors['err'] = $this->userModel->userErrors(); 
+        session_start();
+        $errors = $this->userModel->userErrors(); 
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $data = $_POST; 
@@ -105,20 +108,17 @@ class Users extends Controller{
             
             if($ctr == 0){
                 $data['user_id'] = $i;
-                $this->userModel->updateSelf($data); // INSERT DATA              
-                $errors['message'] = '<p>Udpate success!</p>';
-                    
+                $this->userModel->updateSelf($data); // INSERT DATA 
+                $_SESSION['user']['username'] = $data['username'];                                 
             }
         }
-
+        $errors['data'] = $this->userModel->getUser($i);
         $this->view('profile', $errors);
     }
 
     # UPDATE USER TYPE POST REQUEST
     public function updateUserTypes($i){
         session_start();
-        // var_dump($_POST);
-        // $data['post'] = $_POST;
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $request['user_type'] = $_POST['user_type'];
             $request['user_id'] = $i;

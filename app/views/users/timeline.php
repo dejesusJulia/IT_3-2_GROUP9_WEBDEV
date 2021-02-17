@@ -12,13 +12,17 @@
                             <h5 class="mt-0"><?php echo $post->show_author == false ? 'Anonymous' : $_SESSION['user']['username'];?></h5>
                             
                             <p><?php echo $post->body;?></p>
+                            <?php if($post->img !== null):?>
                             <img src="<?php echo $post->img;?>" alt="..." class="mr-3" style="width: 100px;">
-                            <small><?php echo $post->created_at;?></small>
+                            <?php endif;?>
+                        </div>
+                    </div>
 
+                    <div class="card-footer">
+                        <small><?php echo $post->created_at;?></small>
                             <small>
                             <a href="../user/edit-post?<?php echo $post->post_id;?>">Edit</a>
                             </small>
-
                             <small>
                                 <button class="btn btn-danger btn-sm" onclick="event.preventDefault();if(confirm('Do you want to delete this post?')){
                                     document.getElementById('post-delete-<?php echo $post->post_id;?>').submit()
@@ -26,7 +30,6 @@
                             </small>
 
                             <form action="../user/post-delete?<?php echo $post->post_id;?>" method="post" id="post-delete-<?php echo $post->post_id;?>" style="display: none;"></form>
-                        </div>
                     </div>
                 </div>
             </div>

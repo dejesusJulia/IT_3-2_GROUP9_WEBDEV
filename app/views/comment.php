@@ -26,10 +26,10 @@
                 <div class="card m-1">
                  <!-- ADD COMMENT -->
                     <div class="card-body">
-                        <form action="" method="post">
-                            <input type="hidden" name="user_id" value="">
+                        <form action="../<?php echo $_SESSION['user']['user_type'];?>/comment?<?php echo $data['post']->post_id;?>" method="post">
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['user_id'];?>">
 
-                            <input type="hidden" name="post_id" value="">
+                            <input type="hidden" name="post_id" value="<?php echo $data['post']->post_id;?>">
 
                             <div class="form-group">
                                 <textarea name="comment_body" id="" cols="30" rows="3" class="form-control"></textarea>
@@ -40,19 +40,36 @@
                     </div>
                 </div>
 
+                <?php if($data['comments'] == null):?>
                 <div class="card m-1">
+                
                     <div class="card-body">
-                        <div class="media">
-                            <img src="" alt="">
-
-                            <div class="media-body">
-                                <h5></h5>
-                                <p></p>
-                                <small></small>
-                            </div>
-                        </div>
+                    
+                        <h5 class="text-center">No comments yet</h5>
+                        
                     </div>
                 </div> 
+
+                <?php else:?>
+                    <?php foreach($data['comments'] as $comments):?>
+                    <div class="card m-1">
+                
+                    <div class="card-body">
+                    
+                        <div class="media">
+                            <img src="<?php echo $comments->avatar;?>" alt="...">
+
+                            <div class="media-body">
+                                <h5><?php echo $comments->username;?></h5>
+                                <p><?php echo $comments->comment_body;?></p>
+                                <small></small>
+                            </div>
+                        </div>  
+                    </div>
+                    <?php endforeach;?>
+                </div> 
+                    
+                <?php endif;?>
             </div>
         </div>
     </div>

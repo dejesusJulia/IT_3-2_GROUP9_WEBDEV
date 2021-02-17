@@ -73,7 +73,7 @@ class Posts extends Controller{
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $img = [];
-            $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            $showAuthor = $_POST['show_author'] == 'user' ? true : false;
             $toFilter = [
                 'body' => $_POST['body']
             ];

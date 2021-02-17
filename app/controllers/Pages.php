@@ -165,10 +165,10 @@ class Pages extends Controller{
             die();
         }
         $post = $this->postModel->joinUserPostSingle($i, $_SESSION['user']['user_id']);
-    
+        $comments = $this->commentModel->joinUserCommentsOfPost($i);
         $data = [
-            'postId' => $i,
-            'post' => $post
+            'post' => $post,
+            'comments' => $comments
         ];
         $this->view('comment', $data);
     }

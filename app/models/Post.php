@@ -26,7 +26,7 @@ class Post extends Model{
         return $post;
     }
 
-    # SELECT POST BY USER_ID
+    # SELECT POSTS BY USER_ID
     public function getUserPost($userId){
         $this->colName = $this->columns[1];
         $posts = $this->selectMany($this->table, $this->colName, $userId);
@@ -65,7 +65,7 @@ class Post extends Model{
         return $msg;
     }
 
-    # UPDATE POST IWTH IMAGE
+    # UPDATE POST WITH IMAGE
     public function updateWithImage($post){
         $this->db->query('UPDATE ' . $this->table . ' SET body=:body, img=:img, show_author=:show_author WHERE post_id =:post_id');
 

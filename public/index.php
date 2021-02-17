@@ -55,6 +55,7 @@ $core->get('admin/post-view', 'Pages@postView');
 
 #SHARED PAGES
 $core->get('user/comment', 'Pages@userComment');
+$core->post('user/comment', 'Comments@addUserComment');
 $core->get('admin/comment', 'Pages@adminComment');
 $core->get('profile', 'Pages@profile');
 $core->post('profile', 'Users@updateProfile');

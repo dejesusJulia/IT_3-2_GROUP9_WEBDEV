@@ -3,13 +3,13 @@
 class Filter{
 
     public array $requestData = [];
-    public array $errorData = [];
+    public array $unfilterable = [];
     public string $email = '';
     public string $match = '';
     public array $errors = [];
     public string $err = '';
 
-    # FILTER FOR USER DATA INPUT
+    # FILTER FOR INPUT
     public function inputFilter($request, $errors){
         $this->requestData = $request;
         $this->errors = $errors;
@@ -62,6 +62,9 @@ class Filter{
                 case 'comment_body': 
                     $this->errors[$key]['errors'] = [$this->requiredString($value)];
                     break;
+                default: 
+                    array_push($this->unfilterable, $value);
+                break;
             }
 
         }

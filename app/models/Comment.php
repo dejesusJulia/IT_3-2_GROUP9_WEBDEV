@@ -25,7 +25,7 @@ class Comment extends Model{
 
     # GET COMMENTS OF ONE POST
     public function getPostComments($postId){
-        $this->colName = $this->columns[1];
+        $this->colName = 'post_id';
         $comments = $this->selectMany($this->table, $this->colName, $postId);
         return $comments;
     }
@@ -55,7 +55,7 @@ class Comment extends Model{
     }
 
     # ERROR HANDLER
-    public function postErrors(){
+    public function CommentErrors(){
         return $this->errorHandler([$this->columns[2]]);
     }
 }

@@ -1,7 +1,6 @@
 <?php include_once '../app/views/includes/profile-header.php';?>
     <div class="container mx-auto">
         <div class="col-6 offset-3">
-        <h2><?php echo $data['message'] ?? '';?></h2>
             <form action="profile?<?php echo $data['data']->user_id;?>" method="post" novalidate>
                 <div class="form-group">
                     <input type="text" name="username" id="username" value="<?php echo $data['data']->username ?? $_POST['username'];?>" class="form-control">
