@@ -16,7 +16,7 @@ class Users extends Controller{
             $keys = array_keys($data);
 
             // FILTER
-            $errors = $this->filter()->userFilter($data, $errors);
+            $errors = $this->filter()->inputFilter($data, $errors);
             $ctr = $this->filter()->errorCounter($errors, $keys);
 
             // IF THERE ARE NO MORE ERRORS
@@ -72,7 +72,7 @@ class Users extends Controller{
             // var_dump($data);
 
             // FILTER
-            $errors = $this->filter()->userFilter($data, $errors);
+            $errors = $this->filter()->inputFilter($data, $errors);
             $ctr = $this->filter()->errorCounter($errors, $keys);
             
             // IF THERE ARE NO ERRORS IN FILTER
@@ -100,7 +100,7 @@ class Users extends Controller{
             $keys = array_keys($data);
 
             // FILTER
-            $errors = $this->filter()->userFilter($data, $errors);
+            $errors = $this->filter()->inputFilter($data, $errors);
             $ctr = $this->filter()->errorCounter($errors, $keys);
             
             if($ctr == 0){

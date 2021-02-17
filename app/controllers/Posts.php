@@ -33,7 +33,7 @@ class Posts extends Controller{
             $keys = array_keys($toFilter);
 
             // CALL FILTER FUNCTION
-            $errors = $this->filter()->postFilter($toFilter, $errors);
+            $errors = $this->filter()->inputFilter($toFilter, $errors);
             $ctr = $this->filter()->errorCounter($errors, $keys);
             
             // IF THERE ARE NO ERRORS
@@ -91,7 +91,7 @@ class Posts extends Controller{
             $keys = array_keys($toFilter);
 
             // CALL FILTER FUNCTION
-            $errors = $this->filter()->postFilter($toFilter, $errors);
+            $errors = $this->filter()->inputFilter($toFilter, $errors);
             $ctr = $this->filter()->errorCounter($errors, $keys);
             echo $i;
             if($ctr == 0){

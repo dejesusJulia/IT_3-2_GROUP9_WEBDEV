@@ -10,7 +10,7 @@ class Filter{
     public string $err = '';
 
     # FILTER FOR USER DATA INPUT
-    public function userFilter($request, $errors){
+    public function inputFilter($request, $errors){
         $this->requestData = $request;
         $this->errors = $errors;
 
@@ -50,39 +50,23 @@ class Filter{
                     $avatar = '';
                     $this->errors[$key]['errors'] = [$avatar];
                     break; 
-            }
-        }
-        return $this->errors;
-    }
-    
-    # FILTER FOR POST INPUT
-    public function postFilter($request, $errors){
-        $this->requestData = $request;
-        $this->errors = $errors;
 
-        foreach($this->requestData as $key => $value){
-            switch ($key) {
-                case 'body':
+                case 'body': 
                     $this->errors[$key]['errors'] = [$this->requiredString($value)];
                     break;
-                
-                case 'img':
+
+                case 'img': 
                     $this->errors[$key]['errors'] = [$this->imageFilter($value)];
-                    break;    
-                default:
-                    # code...
+                    break; 
+
+                case 'comment_body': 
+                    $this->errors[$key]['errors'] = [$this->requiredString($value)];
                     break;
             }
-        }
 
+        }
         return $this->errors;
     }
-
-    # FILTER FOR COMMENT INPUT
-    public function commentFilter($reques){
-
-    }
-
 
     // VALIDATION FOR REQUIRED FIELDS
     public function requiredString($string){
