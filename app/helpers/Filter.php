@@ -9,7 +9,7 @@ class Filter{
     public array $errors = [];
     public string $err = '';
 
-    // FILTER FOR USERS INPUT
+    # FILTER FOR USER DATA INPUT
     public function userFilter($request, $errors){
         $this->requestData = $request;
         $this->errors = $errors;
@@ -55,7 +55,7 @@ class Filter{
         return $this->errors;
     }
     
-    // FILTER FOR POST INPUT
+    # FILTER FOR POST INPUT
     public function postFilter($request, $errors){
         $this->requestData = $request;
         $this->errors = $errors;
@@ -76,6 +76,11 @@ class Filter{
         }
 
         return $this->errors;
+    }
+
+    # FILTER FOR COMMENT INPUT
+    public function commentFilter($reques){
+
     }
 
 

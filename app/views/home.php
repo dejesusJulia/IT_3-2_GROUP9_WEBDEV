@@ -62,7 +62,7 @@
                         <?php if(isset($_SESSION['user']['user_type'])):?>
                         <p>
                             <small>
-                                <a href="<?php echo '../' . $_SESSION['user']['user_type'] . '/comment' . $post->post_id;?>">Comment</a>
+                                <a href="<?php echo '../' . $_SESSION['user']['user_type'] . '/comment?' . $post->post_id;?>">Comment</a>
                             </small>
                         </p>
                         <?php endif;?>

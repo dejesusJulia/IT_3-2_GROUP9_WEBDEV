@@ -164,9 +164,11 @@ class Pages extends Controller{
             header('Location: ../admin/home');
             die();
         }
-        
+        $post = $this->postModel->joinUserPostSingle($i, $_SESSION['user']['user_id']);
+    
         $data = [
-            'postId' => $i
+            'postId' => $i,
+            'post' => $post
         ];
         $this->view('comment', $data);
     }

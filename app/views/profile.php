@@ -1,4 +1,4 @@
-<?php include_once '../app/views/includes/shared-header.php';?>
+<?php include_once '../app/views/includes/profile-header.php';?>
     <div class="container mx-auto">
         <div class="col-6 offset-3">
         <h2><?php echo $data['message'] ?? '';?></h2>

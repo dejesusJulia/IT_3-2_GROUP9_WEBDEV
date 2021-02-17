@@ -23,6 +23,13 @@ class Comment extends Model{
         return $comment;
     }
 
+    # GET COMMENTS OF ONE POST
+    public function getPostComments($postId){
+        $this->colName = $this->columns[1];
+        $comments = $this->selectMany($this->table, $this->colName, $postId);
+        return $comments;
+    }
+
     # INSERT ONE COMMENT
     public function insertOne($comment){
         $this->db->query('INSERT INTO '. $this->table . '(user_id, post_id, comment_body) VALUES(:user_id, :post_id, :comment_body)');

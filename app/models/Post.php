@@ -28,7 +28,7 @@ class Post extends Model{
 
     # SELECT POST BY USER_ID
     public function getUserPost($userId){
-        $this->colName = 'user_id';
+        $this->colName = $this->columns[1];
         $posts = $this->selectMany($this->table, $this->colName, $userId);
         return $posts;
     }

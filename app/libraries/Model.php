@@ -64,26 +64,20 @@ class Model{
     }
 
     # JOIN USERS AND POSTS TABLE (SINGLE ROW)
-    // public function joinUserPostSingle($postId){
-    //     $this->db->query("SELECT 
-    //     p.post_id, 
-    //     p.body, 
-    //     p.img, 
-    //     p.show_author, 
-    //     p.created_at, 
-    //     u.username, 
-    //     u.avatar 
-    //     FROM posts p INNER JOIN users u
-    //     ON p.user_id = u.user_id
-    //     INNER JOIN(
-    //         SELECT username
-    //         FROM users
-    //         WHERE user_id
-    //     )
-    //     ");
-    //     $result = $this->db->resultSingle();
-    //     return $result;
-    // }
+    public function joinUserPostSingle($postId){
+        $this->db->query('SELECT 
+        p.post_id, 
+        p.body, 
+        p.img, 
+        p.show_author, 
+        p.created_at, 
+        u.username, 
+        u.avatar 
+         FROM posts p INNER JOIN users u USING (user_id) WHERE post_id =:post_id');
+        $this->db->bind(':post_id', $postId);
+        $result = $this->db->resultSingle();
+        return $result;
+    }
     
     # SET UP ERROR HANDLER
     public function errorHandler($columns){
