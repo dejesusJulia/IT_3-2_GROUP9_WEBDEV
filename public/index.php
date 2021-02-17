@@ -56,7 +56,14 @@ $core->get('admin/post-view', 'Pages@postView');
 #SHARED PAGES
 $core->get('user/comment', 'Pages@userComment');
 $core->post('user/comment', 'Comments@addUserComment');
+// $core->get('user/comment-edit', 'Pages@userCommentEdit');
+// $post->post('user/comment-edit', 'Comments@updateUserComment');
+$core->post('user/comment-delete', 'Comments@destroyUserComment');
+
 $core->get('admin/comment', 'Pages@adminComment');
+// $core->get('admin/comment-edit', 'Pages@adminCommentEdit');
+// $post->post('admin/comment-edit', 'Comments@updateAdminComment');
+$core->post('admin/comment-delete', 'Comments@destroyAdminComment');
 $core->get('profile', 'Pages@profile');
 $core->post('profile', 'Users@updateProfile');
 

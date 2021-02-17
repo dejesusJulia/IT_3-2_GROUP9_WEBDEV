@@ -85,6 +85,7 @@ class Model{
         c.comment_id,
         c.comment_body, 
         c.created_at, 
+        u.user_id,
         u.username, 
         u.avatar
          FROM comments c 

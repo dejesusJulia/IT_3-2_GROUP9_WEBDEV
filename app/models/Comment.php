@@ -41,9 +41,14 @@ class Comment extends Model{
 
     # DELETE POST
     public function deleteComment($comment){
+        $msg = false;
         $this->db->query('DELETE FROM ' . $this->table . ' WHERE comment_id = :comment_id');
         $this->db->bind(':comment_id', $comment);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
+
     }
 
     # UPDATE POST

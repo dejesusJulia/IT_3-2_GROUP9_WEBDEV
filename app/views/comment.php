@@ -22,6 +22,17 @@
         </div>
 
         <div class="col-6 offset-3">
+        
+        <?php if(isset($_SESSION['successMsg'])):?>
+            <p><?php echo $_SESSION['successMsg'];?></p>
+        <?php unset($_SESSION['successMsg']);?>
+
+        <?php elseif(isset($_SESSION['errorMsg'])):?>
+            <p><?php echo $_SESSION['errorMsg'];?></p>
+        <?php unset($_SESSION['errorMsg']);?>
+        <?php else:?>
+            <p></p>
+        <?php endif;?>
             <div class="my-2">
                 <div class="card m-1">
                  <!-- ADD COMMENT -->
@@ -41,12 +52,9 @@
                 </div>
 
                 <?php if($data['comments'] == null):?>
-                <div class="card m-1">
-                
-                    <div class="card-body">
-                    
+                <div class="card m-1">               
+                    <div class="card-body">                   
                         <h5 class="text-center">No comments yet</h5>
-                        
                     </div>
                 </div> 
 
@@ -57,14 +65,28 @@
                     <div class="card-body">
                     
                         <div class="media">
-                            <img src="<?php echo $comments->avatar;?>" alt="...">
+                            <img src="../public/<?php echo $comments->avatar;?>" alt="..." style="width: 50px;">
 
                             <div class="media-body">
                                 <h5><?php echo $comments->username;?></h5>
                                 <p><?php echo $comments->comment_body;?></p>
-                                <small></small>
+                                
                             </div>
                         </div>  
+                    </div>
+                    <div class="card-footer">
+                        <small><?php echo $comments->created_at;?></small>
+                        <?php if($_SESSION['user']['user_id'] == $comments->user_id):?>
+                        <a href="comment-edit?<?php echo $comments->comment_id;?>">Edit</a>
+
+                        <button class="btn btn-danger btn-sm" onclick="event.preventDefault();if(confirm('Do you want to delete your comment in this post?')){
+                            document.getElementById('comment-delete-<?php echo $comments->comment_id;?>').submit();
+                        }">Delete</button>
+
+                        <form id="comment-delete-<?php echo $comments->comment_id;?>" action="../<?php echo $_SESSION['user']['user_type'];?>/comment-delete?<?php echo $data['post']->post_id;?>" method="post" style="display: none;">
+                            <input type="hidden" name="comment_id" value="<?php echo $comments->comment_id;?>">
+                        </form>
+                        <?php endif;?>
                     </div>
                     <?php endforeach;?>
                 </div> 

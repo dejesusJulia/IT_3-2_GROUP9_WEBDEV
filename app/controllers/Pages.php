@@ -175,17 +175,19 @@ class Pages extends Controller{
 
     # ADMIN PAGES - COMMENT PAGE
     public function adminComment($i){
-        // add comment
         session_start();
         if(!isset($_SESSION['user']['user_type'])){
-            header('Location: home');
+            header('Location: ../home');
             die();
         }else if($_SESSION['user']['user_type'] == 'user'){
             header('Location: ../user/home');
             die();
         }
+        $post = $this->postModel->joinUserPostSingle($i, $_SESSION['user']['user_id']);
+        $comments = $this->commentModel->joinUserCommentsOfPost($i);
         $data = [
-            'postId' => $i
+            'post' => $post,
+            'comments' => $comments
         ];
         $this->view('comment', $data);
     }
