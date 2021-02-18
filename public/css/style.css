@@ -1,8 +1,28 @@
-*{
-    margin: 0;
-    padding: 0;
+
+/* BACKGROUND COLORS */
+.bg-blk{ background-color: #333232;}
+.bg-red{ background-color: #c81010;}
+.bg-yellow{ background-color: #fec25c;}
+
+/* TEXT COLORS*/
+.text-black{ color: #333232;}
+.text-red{ color: #c81010;}
+.text-yellow{ color: #fdbb48;}
+
+/* FONT FAMILIES */
+.bebasNeue { font-family: Bebas Neue;}
+.montserrat { font-family: 'Montserrat', sans-serif;}
+
+/* FONT SIZE*/
+
+
+#intro-text > h1{
+    font-size: 10em;
+    line-height: 150px;
+    margin-bottom: 0;
 }
 
-body{
-    background-color: #fff;
+#intro-text > h3{
+    font-size: 2.5em;
 }
+
