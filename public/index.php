@@ -20,9 +20,9 @@ $core = new Core();
 
 # PAGES
 $core->get('index', 'Pages@logout');
-
+$core->get('user', 'Pages@userChoice');
 $core->get('home', 'Pages@home');
-$core->post('home', 'Posts@addPost');
+
 
 // $core->get('post', 'Pages@viewPost');
 // $core->post('search-results', 'Pages@searchResults');
@@ -54,6 +54,14 @@ $core->post('admin/user-delete', 'Users@destroyUser');
 $core->get('admin/post-list', 'Pages@postList');
 
 ### SHARED PAGES ###
+## ADD POST ##
+$core->post('home', 'Posts@addPost');
+
+## PROFILE ##
+$core->get('profile', 'Pages@profile');
+$core->post('profile', 'Users@updateProfile');
+
+## COMMENTS ## 
 $core->get('user/comment', 'Pages@userComment');
 $core->post('user/comment', 'Comments@addUserComment');
 $core->get('user/comment-edit', 'Pages@userCommentEdit');
@@ -65,10 +73,6 @@ $core->post('admin/comment', 'Comments@addAdminComment');
 $core->get('admin/comment-edit', 'Pages@adminCommentEdit');
 $core->post('admin/comment-edit', 'Comments@updateAdminComment');
 $core->post('admin/comment-delete', 'Comments@destroyAdminComment');
-
-#
-$core->get('profile', 'Pages@profile');
-$core->post('profile', 'Users@updateProfile');
 
 ### ACTIVATE ROUTES ###
 $core->run();

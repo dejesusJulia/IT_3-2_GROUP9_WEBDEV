@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-footer">
-                        <small><?php echo $post->created_at;?></small>
+                        <small><?php echo date('Y F j h:i:s a', strtotime($post->created_at));?></small>
                             <small>
                             <a href="../user/edit-post?<?php echo $post->post_id;?>">Edit</a>
                             </small>

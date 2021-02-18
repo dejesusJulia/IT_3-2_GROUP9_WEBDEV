@@ -44,6 +44,9 @@
 
                             <div class="form-group">
                                 <textarea name="comment_body" id="" cols="30" rows="3" class="form-control"></textarea>
+                                <small>
+                                    <?php echo $data['errors']['comment_body']['errors'][0] ?? '';?>
+                                </small>
                             </div>     
 
                             <input type="submit" value="Add Comment" name="addComment">

@@ -13,6 +13,11 @@ class Pages extends Controller{
         $this->view('index');
     }
 
+    # AUTH PAGE
+    public function userAuth(){
+        $this->view('auth-page');
+    }
+
     # LOGIN PAGE
     public function login(){
         $this->view('auth/login');
@@ -97,9 +102,11 @@ class Pages extends Controller{
         }
         $posts = $this->postModel->all();
         $users = $this->userModel->all();
+        $comments = $this->commentModel->all();
         $data = [
             'postCount' => count($posts),
-            'userCount' => count($users)
+            'userCount' => count($users),
+            'commentCount' => count($comments),
         ];
         $this->view('admins/dashboard', $data);
         

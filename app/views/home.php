@@ -57,7 +57,7 @@
                         <?php endif;?>
 
 
-                        <small><?php echo $post->created_at;?></small>
+                        <small><?php echo date('Y F j h:i:s a', strtotime($post->created_at));?></small>
 
                         <?php if(isset($_SESSION['user']['user_type'])):?>
                         <p>
