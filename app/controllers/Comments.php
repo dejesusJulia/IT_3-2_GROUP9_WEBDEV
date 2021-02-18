@@ -1,5 +1,5 @@
 <?php
-
+/* POST REQUESTS FOR COMMENTS */
 class Comments extends Controller{
 
     public function __construct()
@@ -32,8 +32,7 @@ class Comments extends Controller{
                 die();
                 }else{
                     $data['errorMsg'] = 'Error in adding comment';
-                }
-                
+                }                
                 
             }
             

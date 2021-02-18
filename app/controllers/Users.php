@@ -1,4 +1,5 @@
 <?php
+/* CONTROLS ALL USERS TABLE RELATED POST REQUEST*/
 class Users extends Controller{
 
     public function __construct()
@@ -83,9 +84,6 @@ class Users extends Controller{
                     $this->userModel->insertOne($data); // INSERT DATA              
                     $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
                 }   
-                // $this->userModel->insertOne($data); // INSERT DATA              
-                // $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
-                // var_dump($unique);
             }
         }
         $this->view('auth/register', $errors);
@@ -137,7 +135,7 @@ class Users extends Controller{
     }
 
     # DELETE USER
-    public function userDestroy($i){
+    public function destroyUser($i){
         session_start();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($this->userModel->deleteUser($i)){

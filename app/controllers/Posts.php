@@ -118,7 +118,7 @@ class Posts extends Controller{
         $this->view('users/edit-post', $errors);
     }
 
-    public function postDestroy($i){
+    public function destroyPost($i){
         session_start();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($this->postModel->deletePost($i)){

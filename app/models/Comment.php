@@ -32,11 +32,15 @@ class Comment extends Model{
 
     # INSERT ONE COMMENT
     public function insertOne($comment){
+        $msg = false;
         $this->db->query('INSERT INTO '. $this->table . '(user_id, post_id, comment_body) VALUES(:user_id, :post_id, :comment_body)');
         $this->db->bind(':user_id', $comment['user_id']);
         $this->db->bind(':post_id', $comment['post_id']);
         $this->db->bind(':comment_body', $comment['comment_body']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
     }
 
     # DELETE POST
@@ -61,7 +65,6 @@ class Comment extends Model{
             $msg = true;
         }
         return $msg;
-        // $this->db->executes();
 
     }
 

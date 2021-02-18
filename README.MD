@@ -60,10 +60,16 @@ Views are the actual pages seen and accessed by users.
 Controllers are the middleman between the views and models. They perform the necessary functions and pass data to the views. Controller classes are found in *app/controllers* directory. These classes extend to *app/libraries/Controller.php*.
 *Note: It is recommended that the name of Controller classes to be in PLURAL form*
 
-- To access the model, call a constructor and type in:
-`this->modelName = $this->model('ModelName')`
+- To access the model, type in:
+```
+public function __construct(){
+    this->modelName = $this->model('ModelName')
+}
+```
 - To access views, use:
-`$this->views('viewname/without/PHPextenstion', $optionalParameterToPassDataTo)`
+```
+$this->views('viewname/without/PHPextenstion', $optionalParameter)
+```
 
 ----------------------------------------------------------------
 ## PROGRESS

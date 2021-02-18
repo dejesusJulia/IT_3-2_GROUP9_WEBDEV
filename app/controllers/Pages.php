@@ -135,7 +135,7 @@ class Pages extends Controller{
     }  
 
     # UPDATE USER TYPE GET REQUEST
-    public function editUserType($i){
+    public function updateUserTypes($i){
         session_start();
         if(!isset($_SESSION['user']['user_type'])){
             header('Location: home');

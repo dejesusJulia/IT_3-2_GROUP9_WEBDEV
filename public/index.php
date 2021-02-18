@@ -17,6 +17,7 @@ $core = new Core();
 * $core->post('pageYouWantToRedirectTo', 'ControllerName@function');
 *
 */
+
 # PAGES
 $core->get('index', 'Pages@logout');
 
@@ -26,34 +27,33 @@ $core->post('home', 'Posts@addPost');
 // $core->get('post', 'Pages@viewPost');
 // $core->post('search-results', 'Pages@searchResults');
 
-#AUTH
+### AUTH ###
 $core->get('login', 'Pages@login');
 $core->post('login', 'Users@login');
 $core->get('register', 'Pages@register');
 $core->post('register', 'Users@register');
 
-#USERS
+### USERS ###
 $core->get('user/timeline', 'Pages@userTimeline');
 $core->get('user/home', 'Pages@userHome');
 
 $core->post('user/home', 'Posts@addPost');
 $core->get('user/edit-post', 'Pages@editPost');
 $core->post('user/edit-post', 'Posts@updatePost');
-$core->post('user/post-delete', 'Posts@postDestroy');
+$core->post('user/post-delete', 'Posts@destroyPost');
 
-#ADMIN
+### ADMIN ###
 $core->get('admin/dashboard', 'Pages@dash');
 $core->get('admin/home', 'Pages@adminHome');
 
 $core->get('admin/user-list', 'Pages@userList');
-$core->get('admin/user-edit', 'Pages@editUserType');
+$core->get('admin/user-edit', 'Pages@updateUserTypes');
 $core->post('admin/user-edit', 'Users@updateUserTypes');
-$core->post('admin/user-delete', 'Users@userDestroy');
+$core->post('admin/user-delete', 'Users@destroyUser');
 
 $core->get('admin/post-list', 'Pages@postList');
-$core->get('admin/post-view', 'Pages@postView');
 
-#SHARED PAGES
+### SHARED PAGES ###
 $core->get('user/comment', 'Pages@userComment');
 $core->post('user/comment', 'Comments@addUserComment');
 $core->get('user/comment-edit', 'Pages@userCommentEdit');
@@ -61,11 +61,14 @@ $core->post('user/comment-edit', 'Comments@updateUserComment');
 $core->post('user/comment-delete', 'Comments@destroyUserComment');
 
 $core->get('admin/comment', 'Pages@adminComment');
-// $core->get('admin/comment-edit', 'Pages@adminCommentEdit');
-// $core->post('admin/comment-edit', 'Comments@updateAdminComment');
+$core->post('admin/comment', 'Comments@addAdminComment');
+$core->get('admin/comment-edit', 'Pages@adminCommentEdit');
+$core->post('admin/comment-edit', 'Comments@updateAdminComment');
 $core->post('admin/comment-delete', 'Comments@destroyAdminComment');
+
+#
 $core->get('profile', 'Pages@profile');
 $core->post('profile', 'Users@updateProfile');
 
-# ACTIVATE ROUTES
+### ACTIVATE ROUTES ###
 $core->run();

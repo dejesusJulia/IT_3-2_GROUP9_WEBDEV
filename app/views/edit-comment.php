@@ -3,7 +3,6 @@
     <!-- POST -->
     <div class="container mx-auto">
         
-
         <div class="col-6 offset-3">
         
         <?php if(isset($_SESSION['successMsg'])):?>
