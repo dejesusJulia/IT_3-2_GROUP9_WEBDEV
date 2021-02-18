@@ -191,12 +191,45 @@ class Pages extends Controller{
         ];
         $this->view('comment', $data);
     }
-    
+
+    # USER PAGES - EDIT COMMENT PAGE
+    public function userCommentEdit($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'admin'){
+            header('Location: ../admin/home');
+            die();
+        }
+        $comment = $this->commentModel->getComment($i);
+        $data = [
+            'comment' => $comment
+        ];
+        $this->view('edit-comment', $data);
+    }
+
+    # ADMIN PAGES - EDIT COMMENT PAGE
+    public function adminCommentEdit($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $comment = $this->commentModel->getComment($i);
+        $data = [
+            'comment' => $comment
+        ];
+        $this->view('edit-comment', $data);
+    }    
+
     # PROFILE PAGE
     public function profile($i){
         session_start();
         $data['data'] = $this->userModel->getUser($i);
-    
         $this->view('profile', $data);
     }
 

@@ -117,8 +117,8 @@ Controllers are the middleman between the views and models. They perform the nec
 #### Comments
 - [x] Create
 - [x] Read all
-- [ ] Read one
-- [ ] Update comment
+- [x] Read one
+- [x] Update comment
 - [x] Delete comment
 
 #### CHANGES TO APPLY

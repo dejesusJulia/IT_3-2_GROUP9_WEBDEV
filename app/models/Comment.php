@@ -52,11 +52,17 @@ class Comment extends Model{
     }
 
     # UPDATE POST
-    public function updateComment($comment){
-        $this->db->query('UPDATE ' . $this->table . ' SET(comment_body = :comment_body) WHERE comment_id = :comment_id');
+    public function updateComment($comment){  
+        $msg = false;   
+        $this->db->query('UPDATE ' . $this->table . ' SET comment_body = :comment_body WHERE comment_id = :comment_id');
         $this->db->bind(':comment_body', $comment['comment_body']);
         $this->db->bind(':comment_id', $comment['comment_id']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
+        // $this->db->executes();
+
     }
 
     # ERROR HANDLER

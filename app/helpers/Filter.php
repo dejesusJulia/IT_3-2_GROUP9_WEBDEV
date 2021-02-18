@@ -3,10 +3,10 @@
 class Filter{
 
     public array $requestData = [];
+    public array $errors = [];
     public array $unfilterable = [];
     public string $email = '';
     public string $match = '';
-    public array $errors = [];
     public string $err = '';
 
     # FILTER FOR INPUT

@@ -27,9 +27,14 @@ class Comments extends Controller{
 
             // IF THERE ARE NO ERRORS
             if($ctr == 0){
-                $this->commentModel->insertOne($data);
-                header('Location: ../user/comment?' . $i);
+                if($this->commentModel->insertOne($data)){
+                    header('Location: ../user/comment?' . $i);
                 die();
+                }else{
+                    $data['errorMsg'] = 'Error in adding comment';
+                }
+                
+                
             }
             
         }
@@ -61,12 +66,17 @@ class Comments extends Controller{
 
             // IF THERE ARE NO ERRORS
             if($ctr == 0){
-                $this->commentModel->insertOne($data);
-                header('Location: ../admin/comment?' . $i);
-                die();
+                if($this->commentModel->insertOne($data)){
+                    header('Location: ../admin/comment?' . $i);
+                    die();
+                }else{
+                    $data['errorMsg'] = 'Error in adding comment';
+                }  
+                
             }
-            
+
         }
+
         $data = [
             'post' => $post,
             'comments' => $comments,
@@ -79,11 +89,73 @@ class Comments extends Controller{
     # UPDATE USER COMMENT
     public function updateUserComment($i){
         session_start();
+        $comment = $this->commentModel->getComment($i);
+        $errors = $this->commentModel->commentErrors();
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){            
+            $request = [
+                'comment_body' => $_POST['comment_body']
+            ];
+            $keys = array_keys($request);
+
+            // FILTER
+            $errors = $this->filter()->inputFilter($request, $errors);
+            $ctr = $this->filter()->errorCounter($errors, $keys);
+            if($ctr == 0){
+                $request['comment_id'] = $i;
+                if($this->commentModel->updateComment($request)){
+                    header('Location: ../user/comment?'. $_POST['post_id']);
+                    die();
+
+                }else{
+                    $data['errorMsg'] = 'Error in adding comment';
+                }
+                
+            }
+
+        }
+        $data = [
+            'comment' => $comment,
+            'errors' => $errors
+        ];
+        
+        $this->view('edit-comment', $data);
     }
 
     # UPDATE ADMIN COMMENT
     public function updateAdminComment($i){
         session_start();
+        $comment = $this->commentModel->getComment($i);
+        $errors = $this->commentModel->commentErrors();
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){            
+            $request = [
+                'comment_body' => $_POST['comment_body']
+            ];
+            $keys = array_keys($request);
+
+            // FILTER
+            $errors = $this->filter()->inputFilter($request, $errors);
+            $ctr = $this->filter()->errorCounter($errors, $keys);
+            if($ctr == 0){
+                $request['comment_id'] = $i;
+                if($this->commentModel->updateComment($request)){
+                    header('Location: ../admin/comment?'. $_POST['post_id']);
+                    die();
+
+                }else{
+                    $data['errorMsg'] = 'Error in adding comment';
+                }
+                
+            }
+
+        }
+        $data = [
+            'comment' => $comment,
+            'errors' => $errors
+        ];
+        
+        $this->view('edit-comment', $data);
     }
 
     # DELETE USER COMMENT 
