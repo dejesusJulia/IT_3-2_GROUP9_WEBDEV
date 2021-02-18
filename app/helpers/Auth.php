@@ -36,19 +36,5 @@ class Auth{
         return $this->auth;
     }
 
-    # PAGE REDIRECTION
-    public function redirectPage($auth){
-
-    }
-
-    // restrict pages with variables
-    public function restrictGet($param){
-        $page = '';
-        if($param == ''){
-            $page = 'home';
-        }
-        return $page;
-    }
-
     
 }

@@ -104,7 +104,7 @@ $this->views('viewname/without/PHPextenstion', $optionalParameter)
  - [ ] post-list (admin)
  - [ ] post-edit (admin)
 
-### Back End: 87.50%
+### Back End: 100%
 #### Users
 - [x] Create (Register)
 - [x] Read all
@@ -131,6 +131,6 @@ $this->views('viewname/without/PHPextenstion', $optionalParameter)
 - [x] Insert AVATAR and CREATED_AT column in users table
 - [x] Make each user email unique 
 - [X] Unlink unused images (replaced by udpate)
-- [ ] Refactor functions for cleaner code 
+- [x] Refactor functions for cleaner code 
 
 

@@ -39,6 +39,7 @@ class Pages extends Controller{
     # DEFAULT USER TIMELINE
     public function userTimeline($i){
         session_start();
+        // $posts holds all the post of one user
         $posts = $this->postModel->getUserPost($i);
         $this->view('users/timeline', $posts);
     }
@@ -46,7 +47,7 @@ class Pages extends Controller{
     # REDIRECT HOME FOR USER
     public function userHome(){
         session_start();
-
+        // TO RESTRICT ACCESS FOR USERS
         if(!isset($_SESSION['user']['user_type'])){
             header('Location: ../home');
             die();
