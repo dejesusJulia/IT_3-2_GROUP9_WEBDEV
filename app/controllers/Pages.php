@@ -112,20 +112,6 @@ class Pages extends Controller{
         $this->view('admins/dashboard', $data);
         
     }   
-
-    # ADMIN PAGE - POST LIST
-    public function postList(){
-        session_start();
-        if(!isset($_SESSION['user']['user_type'])){
-            header('Location: ../home');
-            die();
-        }else if($_SESSION['user']['user_type'] == 'user'){
-            header('Location: ../user/home');
-            die();
-        }
-        $posts = $this->postModel->joinUserPost();
-        $this->view('admins/post-list', $posts);
-    }
     
     # ADMIN PAGE - USER LIST
     public function userList(){

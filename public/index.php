@@ -20,7 +20,7 @@ $core = new Core();
 
 # PAGES
 $core->get('index', 'Pages@logout');
-$core->get('user', 'Pages@userChoice');
+$core->get('user', 'Pages@userAuth');
 $core->get('home', 'Pages@home');
 
 
@@ -50,8 +50,6 @@ $core->get('admin/user-list', 'Pages@userList');
 $core->get('admin/user-edit', 'Pages@updateUserTypes');
 $core->post('admin/user-edit', 'Users@updateUserTypes');
 $core->post('admin/user-delete', 'Users@destroyUser');
-
-$core->get('admin/post-list', 'Pages@postList');
 
 ### SHARED PAGES ###
 ## ADD POST ##

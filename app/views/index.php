@@ -6,7 +6,7 @@
     <title>Document</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/style.css">
+    <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/style-landing.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap" rel="stylesheet">
@@ -24,11 +24,11 @@
             <div class="container">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="<?php echo URLROOT . '/login';?>" class="nav-link">Login</a>
+                        <a href="<?php echo URLROOT . '/login';?>" class="nav-link">login</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="<?php echo URLROOT . '/register';?>" class="nav-link">Register</a>
+                        <a href="<?php echo URLROOT . '/register';?>" class="nav-link">register</a>
                     </li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
     </header>
     
     <div class="container">
-        <section class="my-5">
+        <section id="intro-section" class="section py-5 my-5">
             <div class="d-flex justify-content-center">
                 <div id="intro-text">
                     <h1 class="text-red bebasNeue" >LIBERTAD</h1>
@@ -52,9 +52,9 @@
             </div>
         </section>
 
-        <section class="my-5">
-            <h2>Express yourself freely</h2>
-            <div class="row">
+        <section id="express-section" class="section my-5">
+            <p class="fs-4em">Express yourself <span class="text-red font-weight-bold">freely</span></p>
+            <div class="row py-5">
                 <div class="col-md-4">
                     <div class="circle"></div>
                     <div class="card">
@@ -64,7 +64,7 @@
 
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eius consequuntur corrupti, eaque voluptates voluptatibus?</p>
 
-                            <button>Comment</button>
+                            <button class="montserrat font-weight-bold btn btn-yellow my-3 fs-1em">Comment</button>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
 
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eius consequuntur corrupti, eaque voluptates voluptatibus?</p>
 
-                            <button>Comment</button>
+                            <button class="montserrat font-weight-bold btn btn-yellow my-3 fs-1em">Comment</button>
                         </div>
                     </div>
                 </div>
@@ -92,30 +92,37 @@
 
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint eius consequuntur corrupti, eaque voluptates voluptatibus?</p>
 
-                            <button>Comment</button>
+                            <button class="montserrat font-weight-bold btn btn-yellow my-3 fs-1em">Comment</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="my-5">
-            <div>
-                <img src="img/undraw_personal_opinions_g3kr.svg" alt="undraw_personal_opinions" width="500px">
-            </div>
-
-            <div>
-                <div>
-                    <p>Be a part</p>
-                    <p>of the</p>
-                    <h4>discussion</h4>
+        <section class="section my-5 py-5">
+            <div class="d-flex justify-content-center">
+                <div class="mx-auto">
+                    <img src="img/undraw_personal_opinions_g3kr.svg" alt="undraw_personal_opinions" width="500px">
                 </div>
-                <a href="user">Join us</a>
+
+                <div class="py-5">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <p class="montserrat fs-4em">Be a part</p>
+                        <p class="montserrat fs-4em">of the</p>
+                        <h4 class="montserrat fs-4em text-red font-weight-bolder">discussion</h4>
+                        <a href="user" class="montserrat font-weight-bold btn btn-yellow my-3 fs-1p5em">JOIN US</a>
+                    </div>
+                    
+                </div>
             </div>
+            
         </section>
     </div>
 
     <footer class="">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+  <path fill="#333232" fill-opacity="1" d="M0,224L40,213.3C80,203,160,181,240,176C320,171,400,181,480,197.3C560,213,640,235,720,250.7C800,267,880,277,960,282.7C1040,288,1120,288,1200,266.7C1280,245,1360,203,1400,181.3L1440,160L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path>
+</svg>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

@@ -14,7 +14,30 @@
 .montserrat { font-family: 'Montserrat', sans-serif;}
 
 /* FONT SIZE*/
+.fs-4em{ 
+    font-size: 4em;
+    line-height: 60px;
+}
+.fs-1em{ font-size: 1em;}
+.fs-1p5em{ font-size: 1.5em;}
 
+.btn-yellow{ background-color: #fec25c; }
+.btn-yellow:hover{ background-color: #e7b152; }
+
+.section{
+    position: relative;
+    top: 50px;
+    height: 600px;
+}
+/* #intro-section{
+    position: relative;
+    top: 50px;
+    height: 600px;
+}
+
+#express-section{
+    position: relative;
+} */
 
 #intro-text > h1{
     font-size: 10em;
