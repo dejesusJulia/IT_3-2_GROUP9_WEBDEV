@@ -33,6 +33,16 @@ class User extends Model{
         return $user;
     }
 
+    # GET USER BY USER TYPE
+    public function allUserTypeOf($type){
+        $this->db->query('SELECT * FROM users WHERE user_type = :user_type');
+        $this->db->bind(':user_type', $type);
+        $results = $this->db->resultSet();
+
+        return $results;
+
+    }
+
     # INSERT SINGLE USER 
     public function insertOne($user){
         $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);

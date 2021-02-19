@@ -82,7 +82,7 @@ class Users extends Controller{
                     $errors['message'] = '<p>Email is taken. Please enter a new email.</p>';
                 }else{
                     $this->userModel->insertOne($data); // INSERT DATA              
-                    $errors['message'] = '<p>Success! You may now <a href=\"login\">Login</a>';
+                    $errors['message'] = '<p>Success! You may now <a href="login">Login</a>';
                 }   
             }
         }

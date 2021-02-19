@@ -4,10 +4,15 @@ include_once '../app/views/includes/dash.php';
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
+                <h1 class="mt-4">Admin</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item">User-List</li>
+                    </ol>
                 <div class="card m-4">
                     <div class="card-header">
                         <i class="fas fa-table mr-1"></i>
-                        DataTable Example
+                        All users
                     </div>
 
                     <div class="card-body">
@@ -40,11 +45,13 @@ include_once '../app/views/includes/dash.php';
                                     <td><?php echo $col->user_email;?></td>
                                     <td><?php echo $col->user_type;?></td>
                                     <td>
-                                    <a href="user-edit?<?php echo $col->user_id;?>">Edit</a>
-                                    <button class="btn btn-danger" onclick="event.preventDefault();
+                                    <a href="user-edit?<?php echo $col->user_id;?>">
+                                        <i class="fas fa-users-cog"></i>
+                                    </a>
+                                    <button class="btn btn-sm btn-danger" onclick="event.preventDefault();
                                     if(confirm('Do you want to delete <?php echo $col->username;?>?')){
                                     document.getElementById('user-delete-<?php echo $col->user_id;?>').submit()
-                                    }">Delete</button>
+                                    }"><i class="fas fa-trash"></i></button>
 
                                     <form action="../admin/user-delete?<?php echo $col->user_id;?>" method="post" id="user-delete-<?php echo $col->user_id;?>" style="display: none;"></form>
                                     </td>
@@ -56,7 +63,9 @@ include_once '../app/views/includes/dash.php';
                                     <td><?php echo $col->user_email;?></td>
                                     <td><?php echo $col->user_type;?></td>
                                     <td>
-                                    <a href="../profile?<?php echo $col->user_id;?>">Edit profile</a>
+                                    <a href="../profile?<?php echo $col->user_id;?>">
+                                        <i class="fas fa-user-cog"></i>
+                                    </a>
                                     </td>
                                 </tr>
                                 <?php

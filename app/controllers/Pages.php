@@ -102,12 +102,14 @@ class Pages extends Controller{
             die();
         }
         $posts = $this->postModel->all();
-        $users = $this->userModel->all();
+        $users = $this->userModel->allUserTypeOf('user');
+        $admins = $this->userModel->allUserTypeOf('admin');
         $comments = $this->commentModel->all();
         $data = [
             'postCount' => count($posts),
             'userCount' => count($users),
             'commentCount' => count($comments),
+            'adminCount' => count($admins)
         ];
         $this->view('admins/dashboard', $data);
         
