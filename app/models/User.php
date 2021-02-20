@@ -45,6 +45,7 @@ class User extends Model{
 
     # INSERT SINGLE USER 
     public function insertOne($user){
+        $msg = false;
         $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
 
         $this->db->query('INSERT INTO ' . $this->table . '(username, user_email, user_type, password, avatar) VALUES(:username, :user_email, :user_type, :password, :avatar)');
@@ -54,7 +55,10 @@ class User extends Model{
         $this->db->bind(":user_type", $this->nullable['user_type']);
         $this->db->bind(":password", $user['password']);
         $this->db->bind(":avatar", $user['avatar']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
 
     }
 

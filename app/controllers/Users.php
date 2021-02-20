@@ -79,10 +79,16 @@ class Users extends Controller{
             if($ctr == 0){
                 $unique = $this->userModel->getOne($data['user_email']);
                 if($unique !== false){
-                    $errors['message'] = '<p>Email is taken. Please enter a new email.</p>';
+                    $errors['warningMessage'] = 'Email is taken. Please enter a new email.';
                 }else{
-                    $this->userModel->insertOne($data); // INSERT DATA              
-                    $errors['message'] = '<p>Success! You may now <a href="login">Login</a>';
+                    // if registration is successful
+                    if($this->userModel->insertOne($data)){
+                        header('Location: login');
+                        die();
+                    }else{
+                        $errors['errorMessage'] = 'Registration failed';
+                    }
+                    
                 }   
             }
         }

@@ -47,6 +47,7 @@ class Core{
         $url = $this->getURL();
         $request = $this->requestMethod();
         $this->params[0] = $this->paramBreakdown();
+        $controller = '';
 
         if($url == ''){
             $this->controller = ['Pages', 'index'];
@@ -63,13 +64,17 @@ class Core{
         }
 
         // require controller
-        require_once '../app/controllers/' . $this->controller[0] . '.php';
-        $controller = new $this->controller[0];
-        $function = $this->controller[1];
-
-        // if($get !== ''){
-        //     $this->params[0] = $get;
-        // }
+        if(file_exists('../app/controllers/' . $this->controller[0] . '.php')){
+            require_once '../app/controllers/' . $this->controller[0] . '.php';
+            $controller = new $this->controller[0];
+            $function = $this->controller[1];
+        }else{
+            $defaultController = 'Pages';
+            require_once '../app/controllers/' . $defaultController . '.php';
+            $controller = new $defaultController;
+            $function = 'notFound';
+        }
+        
         call_user_func_array(array($controller, $function), $this->params);
     }
 

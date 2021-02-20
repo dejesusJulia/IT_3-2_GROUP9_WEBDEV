@@ -41,20 +41,33 @@
         </div>
         <?php endif;?>
 
+        <!-- ALL POSTS -->
         <?php foreach($data['posts'] as $post):?>
         <div class="card">
             <div class="card-body">
 
                 <div class="media">
+                    <?php if(isset($_SESSION['user']['user_type'])):?>
                     <img src="../public/<?php echo $post->avatar ?? ''?>" class="mr-3" alt="asd" style="width:100px;">
+                    <?php else:?>
+                    <img src="public/<?php echo $post->avatar ?? ''?>" class="mr-3" alt="asd" style="width:100px;">
+                    <?php endif;?>
                     <div class="media-body">
                         <h5 class="mt-0"><?php echo $post->show_author == false ? 'Anonymous' : $post->username?></h5>
                         
                         <p><?php echo $post->body;?></p>
 
-                        <?php if($post->img !== null):?>
-                        <img src="<?php echo $post->img ?? ''?>" class="mr-3" alt="..." style="width:100px;">
+
+                        <?php if(isset($_SESSION['user']['user_type'])):?>
+                            <?php if($post->img !== null):?>
+                            <img src="<?php echo $post->img ?? ''?>" class="mr-3" alt="..." style="width:100px;">
+                            <?php endif;?>
+                        <?php else:?>
+                            <?php if($post->img !== null):?>
+                            <img src="<?php echo str_replace('../public/', '', $post->img) ?>" class="mr-3" alt="..." style="width:100px;">
+                            <?php endif;?>
                         <?php endif;?>
+                        
 
 
                         <small><?php echo date('Y F j h:i:s a', strtotime($post->created_at));?></small>

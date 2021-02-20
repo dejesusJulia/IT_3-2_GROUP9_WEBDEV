@@ -236,4 +236,9 @@ class Pages extends Controller{
         $this->view('index');  
     }
 
+    # 404 NOT FOUND
+    public function notFound(){
+        $this->view('page-404');
+    }
+
 }
