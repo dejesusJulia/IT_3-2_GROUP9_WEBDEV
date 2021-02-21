@@ -3,8 +3,15 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
+                <h1 class="mt-4">Admin</h1>
+                <ol class="breadcrumb my-4">
+                    <li class="breadcrumb-item">
+                        <a href="../admin/user-list">User List</a>
+                    </li>
+                    <li class="breadcrumb-item">Edit User</li>
+                </ol>
                 <div class="row m-5">
-                    <div class="col-6 offset-3">
+                    <div class="col-4 offset-4">
                     <!-- ALERT MESSAGES -->
                     <?php if(isset($data['successMsg'])):?>
                     <div class="alert alert-success">
@@ -22,14 +29,12 @@
                             <div class="card-body">
                                 <form action="user-edit?<?php echo $data['userData']->user_id;?>" method="post" class="form">
                                     <div class="form-group row">
-                                        <label for="name" class="col-form-label col-sm-2">Name</label>
                                         <div class="col-sm-10">
                                             <p><?php echo $data['userData']->username;?></p>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="email" class="col-form-label col-sm-2">Email</label>
                                         <div class="col-sm-10">
                                             <p><?php echo $data['userData']->user_email;?></p>
                                         </div>
@@ -44,7 +49,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="submit" value="Update" class="btn btn-primary" name="updateUserType">
+                                        <input type="submit" value="Update" class="btn btn-primary btn-block" name="updateUserType">
                                     </div>
                                 </form>
                             </div>

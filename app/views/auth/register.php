@@ -39,30 +39,38 @@
                 <form action="register" method="post" novalidate>
                     <div class="form-group">
                         <input type="text" name="username" id="user-name" placeholder="username" class="form-control">
-                        <small>
-                        <?php echo $data['username']['errors']['0'] ?? '';?>
+                        <?php if(isset($data['username']['errors']['0'])):?>
+                        <small class="text-danger">
+                        <?php echo $data['username']['errors']['0'] ;?>
                         </small>
+                        <?php endif;?>
                     </div>
                     
                     <div class="form-group">
                         <input type="email" name="user_email" id="user-email" placeholder="email" class="form-control">
-                        <small>
-                        <?php echo $data['user_email']['errors']['0'] ?? '';?>
+                        <?php if(isset($data['user_email']['errors']['0'])):?>
+                        <small class="text-danger">
+                        <?php echo $data['user_email']['errors']['0'];?>
                         </small>
+                        <?php endif;?>
                     </div>
                     
                     <div class="form-group">
                         <input type="password" name="password" id="user-pass" placeholder="password" class="form-control">
-                        <small>
-                        <?php echo $data['password']['errors']['0'] ?? '';?>
+                        <?php if(isset($data['password']['errors']['0'])):?>
+                        <small class="text-danger">
+                        <?php echo $data['password']['errors']['0'];?>
                         </small>
+                        <?php endif;?>
                     </div>
                     
                     <div class="form-group">
                         <input type="password" name="confirmPassword" id="userpassC" placeholder="confirm password" class="form-control">
-                        <small>
-                        <?php echo $data['confirmPassword']['errors']['0'] ?? '';?>
+                        <?php if(isset($data['confirmPassword']['errors']['0'])):?>
+                        <small class="text-danger">
+                        <?php echo $data['confirmPassword']['errors']['0'];?>
                         </small>
+                        <?php endif;?>
                     </div>
                     
                     <div class="form-group">
@@ -77,7 +85,7 @@
                         </div>
                     </div>
 
-                    <input type="submit" value="Submit" name="register" class="btn btn-block btn-primary">
+                    <input type="submit" value="Register" name="register" class="btn btn-block btn-primary">
                 </form>
             </div>
         </div>

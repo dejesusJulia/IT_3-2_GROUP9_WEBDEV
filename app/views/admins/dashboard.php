@@ -43,23 +43,26 @@ include_once '../app/views/includes/dash.php';
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        Post Views
+                                        <i class="fas fa-chart-pie mr-1"></i>
+                                        Post Authors
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="myAreaChart" width="100%" height="40" class="chartjs-render-monitor"></canvas>
-                                        </div>    
-                                    </div>
+                                        <canvas id="myPieChart" width="100%" height="40" class="chartjs-render-monitor"></canvas>
+                                        <input type="number" id="nonAnon" style="display: none;" value="<?php echo (int)$data['nonAnonPost'];?>">
+
+                                        <input type="number" id="anon" style="display: none;" value="<?php echo (int)$data['anonPost'];?>">
+                                    </div>    
+                                </div>
                             </div>
                             
                             <div class="col-xl-6">
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-chart-bar mr-1"></i>
-                                        User Registration
+                                        Post Views
                                     </div>
                                     <div class="card-body">
-                                        <canvas id="myBarChart" width="100%" height="40"></canvas>
+                                        <canvas id="myAreaChart" width="100%" height="40"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -87,8 +90,8 @@ include_once '../app/views/includes/dash.php';
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         
         <script src="<?php echo URLROOT;?>/public/assets/demo/datatables-demo.js"></script>
+        <script src="<?php echo URLROOT;?>/public/assets/demo/chart-pie-demo.js"></script>
         <script src="<?php echo URLROOT;?>/public/assets/demo/chart-area-demo.js"></script>
-        <script src="<?php echo URLROOT;?>/public/assets/demo/chart-bar-demo.js"></script>
         
     </body>
 </html>

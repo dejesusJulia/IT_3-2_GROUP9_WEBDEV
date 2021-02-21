@@ -33,6 +33,14 @@ class Post extends Model{
         return $posts;
     }
 
+    # SELECT POSTS BY ANONIMITY
+    public function getAnonPosts($anon){
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE show_author = :show_author');
+        $this->db->bind(':show_author', $anon);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+
     # INSERT SINGLE POST W/O IMG
     public function insertOne($post){
         $this->db->query('INSERT INTO ' . $this->table . '(body, user_id, show_author) VALUES(:body, :user_id, :show_author)');

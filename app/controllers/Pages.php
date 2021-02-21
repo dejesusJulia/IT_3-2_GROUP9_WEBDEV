@@ -105,11 +105,16 @@ class Pages extends Controller{
         $users = $this->userModel->allUserTypeOf('user');
         $admins = $this->userModel->allUserTypeOf('admin');
         $comments = $this->commentModel->all();
+        $nonAnon = $this->postModel->getAnonPosts(1);
+        $anon = $this->postModel->getAnonPosts(0);
+
         $data = [
             'postCount' => count($posts),
             'userCount' => count($users),
             'commentCount' => count($comments),
-            'adminCount' => count($admins)
+            'adminCount' => count($admins),
+            'nonAnonPost' => count($nonAnon),
+            'anonPost' => count($anon)
         ];
         $this->view('admins/dashboard', $data);
         
