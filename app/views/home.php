@@ -8,14 +8,34 @@
                     <form action="../user/home" method="post" class="form" enctype="multipart/form-data" novalidate>
                         
                         <div class="form-group">
-                            <textarea name="body" id="body" cols="30" rows="5" placeholder="post body" class="form-control"><?php echo $_POST['body'] ?? '';?></textarea>
+                            <textarea name="body" id="post-body" cols="30" rows="5" placeholder="What's new?" class="form-control"><?php echo $_POST['body'] ?? '';?></textarea>
+                            
+                            <?php if(isset($data['err']['body']['errors'][0])):?>
+                            <small class="text-danger">
+                            <?php echo $data['err']['body']['errors'][0];?>
+                            </small>
+                            <?php endif;?>
+                            
                         </div>
-                        <?php echo $data['err']['body']['errors'][0] ?? '';?>
+                        
+                        <div class="form-row">   
+                            <div class="col-6">
+                                <div class="form-group" id="img-group">     
+                                    <input type="file" name="img" id="form-img" hidden>
+                                    <label for="form-img" id="img-lbl" class="btn btn-danger btn-sm">
+                                        Photo
+                                    </label>
+                                    <span id="img-name" class="text-muted"></span>
 
-                        <div class="form-group">
-                            <input type="file" name="img" id="img">
+                                    <?php if(isset($data['err']['img']['errors'][0])):?>
+                                    <small class="text-danger">
+                                    <?php echo $data['err']['img']['errors'][0];?>  
+                                    </small>
+                                    <?php endif;?>
+
+                                </div>                              
+                            </div> 
                         </div>
-                        <?php echo $data['err']['img']['errors'][0] ?? '';?>
                         
                         <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['user_id'];?>">
 
@@ -84,6 +104,9 @@
             </div>
         </div>
         <?php endforeach;?>
-    </section>   
+    </section> 
+    
+    <script src="<?php echo URLROOT;?>/public/js/home-script.js"></script>
+    
 </body>
 </html>

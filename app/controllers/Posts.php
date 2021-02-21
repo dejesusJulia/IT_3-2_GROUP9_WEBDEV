@@ -8,13 +8,17 @@ class Posts extends Controller{
 
     # CREATE POST
     public function addPost(){
+        session_start();
         $posts = $this->postModel->joinUserPost();
         $errors = $this->postModel->postErrors();
 
         // ON SUBMIT
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $img = [];  // ARRAY FOR IMAGE
-            $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            $showAuthor = false;
+            if(isset($_POST['show_author'])){
+                $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            }
             // INPUT TO FILTER
             $toFilter = [
                 'body' => $_POST['body']
@@ -68,6 +72,7 @@ class Posts extends Controller{
     }
 
     public function updatePost($i){
+        session_start();
         $oldPost = $this->postModel->getPost($i);
         $errors = $this->postModel->postErrors();
         

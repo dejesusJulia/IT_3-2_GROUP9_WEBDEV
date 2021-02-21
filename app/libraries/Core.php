@@ -52,15 +52,16 @@ class Core{
         if($url == ''){
             $this->controller = ['Pages', 'index'];
 
-        }else if($request == 'get'){
+        }else if($request == 'get' && isset($this->routes['get'][$url])){
             // IF GET REQUEST IS CALLED         
             $this->callback = $this->routes['get'][$url];
             $this->controller = explode('@', $this->callback);
 
-        }else if($request == 'post'){
+        }else if($request == 'post' && isset($this->routes['post'][$url])){
             // IF POST REQUEST IS CALLED
             $this->callback = $this->routes['post'][$url];
             $this->controller = explode('@', $this->callback);
+
         }
 
         // require controller
@@ -68,6 +69,7 @@ class Core{
             require_once '../app/controllers/' . $this->controller[0] . '.php';
             $controller = new $this->controller[0];
             $function = $this->controller[1];
+            
         }else{
             $defaultController = 'Pages';
             require_once '../app/controllers/' . $defaultController . '.php';
