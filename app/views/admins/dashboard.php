@@ -63,6 +63,11 @@ include_once '../app/views/includes/dash.php';
                                     </div>
                                     <div class="card-body">
                                         <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                                        <input type="hidden" id="wkOne" value="<?php echo $data['weekOne'];?>">
+
+                                        <input type="hidden" id="wkTwo" value="<?php echo $data['weekTwo'];?>">
+
+                                        <input type="hidden" id="wkThree" value="<?php echo $data['weekThree'];?>">
                                     </div>
                                 </div>
                             </div>

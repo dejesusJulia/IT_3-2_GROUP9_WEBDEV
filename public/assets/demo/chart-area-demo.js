@@ -4,10 +4,14 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+var wkOne = document.getElementById('wkOne').value;
+var wkTwo = document.getElementById('wkTwo').value;
+var wkThree = document.getElementById('wkThree').value;
+
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Feb 21", "Feb 22", "Feb 23", "Feb 24", "Feb 25", "Feb 26", "Feb 27", "Feb 28", "Mar 1", "Mar 2", "Mar 3", "Mar 4", "Mar 5"],
+    labels: ["Feb 01", "Feb 15", "Feb 22"],
     datasets: [{
       label: "Views",
       lineTension: 0.3,
@@ -20,7 +24,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [0, 10, 5, 12, 11, 8, 15, 20, 22, 22, 30, 36, 40],
+      data: [wkOne, wkTwo, wkThree],
     }],
   },
   options: {
@@ -33,13 +37,13 @@ var myLineChart = new Chart(ctx, {
           display: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 3
         }
       }],
       yAxes: [{
         ticks: {
           min: 0,
-          max: 150,
+          max: 30,
           maxTicksLimit: 5
         },
         gridLines: {

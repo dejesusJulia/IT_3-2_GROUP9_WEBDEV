@@ -29,15 +29,6 @@
     top: 50px;
     height: 600px;
 }
-/* #intro-section{
-    position: relative;
-    top: 50px;
-    height: 600px;
-}
-
-#express-section{
-    position: relative;
-} */
 
 #intro-text > h1{
     font-size: 10em;
@@ -48,4 +39,94 @@
 #intro-text > h3{
     font-size: 2.5em;
 }
+
+#express-section{
+    height: auto;
+}
+.avatar{
+    width: 175px;
+    position: relative;
+    z-index: 10;
+    top: 75px;
+}
+.date{
+    display: block;
+    text-align: center !important;
+}
+
+.center-btn{
+    align-self: center;
+}
+
+.footer-content{
+    background-color: #333232;
+}
+
+@media(min-width: 992px) and (max-width: 1020px){
+    #intro-text > h1{
+        font-size: 8em;
+        line-height: 100px;
+        margin-bottom: 0;
+    }
+
+    #intro-text > h3{
+        font-size: 2em;
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+    #intro-text > h1{
+        font-size: 8em;
+        line-height: 100px;
+        margin-bottom: 0;
+    }
+
+    #intro-text > h3{
+        font-size: 2em;
+    }
+
+}
+
+@media(min-width: 576px) and (max-width:767px){
+    
+    #intro-text > h1{
+        font-size: 8em;
+        line-height: 100px;
+        margin-bottom: 0;
+    }
+
+}
+
+@media(min-width: 992px){
+    .fc{
+        flex-direction: row;
+    }
+}
+
+@media(max-width: 991px){
+    .fc{
+        flex-direction: column;
+    }
+}
+
+@media(max-width:575px){
+    #intro-text > h1{
+        font-size: 6em;
+        line-height: 100px;
+        margin-bottom: 0;
+    }
+
+    #intro-text > h3{
+        font-size: 5vw;
+    }
+
+    
+}
+@media(max-width: 425px){
+    .fs-4em{
+        font-size: 3.5em;
+    }
+}
+
+
 

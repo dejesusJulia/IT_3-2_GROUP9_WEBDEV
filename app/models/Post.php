@@ -35,10 +35,10 @@ class Post extends Model{
 
     # SELECT POSTS BY ANONIMITY
     public function getAnonPosts($anon){
-        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE show_author = :show_author');
+        $this->db->query('SELECT COUNT(*) AS total FROM ' . $this->table . ' WHERE show_author = :show_author');
         $this->db->bind(':show_author', $anon);
-        $results = $this->db->resultSet();
-        return $results;
+        $result = $this->db->resultSingle();
+        return $result;
     }
 
     # INSERT SINGLE POST W/O IMG

@@ -108,13 +108,34 @@ class Pages extends Controller{
         $nonAnon = $this->postModel->getAnonPosts(1);
         $anon = $this->postModel->getAnonPosts(0);
 
+        $weekOne = date('Y-m-d h:i:s', strtotime('February 01 2021 12:00 am'));
+        $weekOnePosts = 0;
+        
+        $weekTwo = date('Y-m-d h:i:s', strtotime('February 08 2021 12:00 am'));
+        $weekTwoPosts = 0;
+
+        $weekThree = date('Y-m-d h:i:s', strtotime('February 22 2021 12:00 am'));
+        $weekThreePosts = 0;
+        foreach($posts as $post){
+            if($post->created_at == $weekOne && $post->created_at < $weekTwo){
+                $weekOnePosts++;
+            }else if($post->created_at == $weekTwo && $post->created_at < $weekThree){
+                $weekTwoPosts++;
+            }else{
+                $weekThreePosts++;
+            }
+        }
+
         $data = [
             'postCount' => count($posts),
             'userCount' => count($users),
             'commentCount' => count($comments),
             'adminCount' => count($admins),
-            'nonAnonPost' => count($nonAnon),
-            'anonPost' => count($anon)
+            'nonAnonPost' => $nonAnon->total,
+            'anonPost' => $anon->total,
+            'weekOne' => $weekOnePosts,
+            'weekTwo' => $weekTwoPosts,
+            'weekThree' => $weekThreePosts,
         ];
         $this->view('admins/dashboard', $data);
         
