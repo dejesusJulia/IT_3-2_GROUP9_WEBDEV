@@ -120,7 +120,12 @@ class Posts extends Controller{
                 die();
             }
         }
-        $this->view('users/edit-post', $errors);
+
+        $data = [
+            'err' => $errors,
+            'post' => $oldPost 
+        ];
+        $this->view('users/edit-post', $data);
     }
 
     public function destroyPost($i){

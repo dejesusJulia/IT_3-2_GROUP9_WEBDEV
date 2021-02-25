@@ -1,3 +1,5 @@
+AOS.init();
+
 function resizeFunc(){
 
     var w = window.outerWidth;
@@ -9,3 +11,4 @@ function resizeFunc(){
     }
 
 }
+

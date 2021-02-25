@@ -71,7 +71,8 @@ class Pages extends Controller{
             die();
         }
         $post = $this->postModel->getPost($i);
-        $this->view('users/edit-post', $post);
+        $data = ['post' => $post];
+        $this->view('users/edit-post', $data);
     }
     
     # REDIRECT HOME FOR ADMIN

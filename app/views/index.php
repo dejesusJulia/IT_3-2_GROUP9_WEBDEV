@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo SITENAME?></title>
     
+    <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/style-landing.css">
 
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat&display=swap" rel="stylesheet">
 
-
+    <!-- SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
@@ -121,7 +123,7 @@
         </section>
 
         <!-- THIRD SECTION -->
-        <section class="section my-5 py-5">
+        <section id="last-section" class="section my-5 py-5">
             <div id="illusTwo" class="d-flex fc justify-content-center">
                 <div class="mx-auto">
                     <img src="img/undraw_personal_opinions_g3kr.svg" alt="undraw_personal_opinions" width="500px" class="img-fluid">
@@ -149,55 +151,59 @@
     <div class="footer-content">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h1 class="text-white bebasNeue">Libertad</h1>
-                    <h3 class="text-yellow bebasNeue">A SAFE SPACE FOR PUPIANS</h3>
-                    <p class="text-white">All rights reserved &copy; <?php echo date('Y');?></p>
+                <div id="footer-text" class="col-lg-4  col-md-12 my-5">
+                    <h1 class="text-white bebasNeue text-center">Libertad</h1>
+                    <h3 class="text-yellow bebasNeue text-center">A SAFE SPACE FOR PUPIANS</h3>
+                    <p class="text-white text-center">All rights reserved &copy; <?php echo date('Y');?></p>
                 </div>
 
-                <div class="col-md-4">
-                    <ul class="list-unstyled align-items-center">
-                        <li>
-                            <a class="text-white" href="<?php echo URLROOT . '/home';?>" class="text">Home</a>
-                        </li>
+                <div class="col-lg-4 col-md-12">
+                    <div class="mx-auto p-5">
+                        <ul class="list-unstyled text-center">
+                            <li class="my-3 montserrat">
+                                <a class="text-white" href="<?php echo URLROOT . '/home';?>" class="text">Home</a>
+                            </li>
 
-                        <li>
-                            <a class="text-white" href="<?php echo URLROOT . '/about';?>">Guest</a>
-                        </li>
+                            <li class="my-3 montserrat">
+                                <a class="text-white" href="<?php echo URLROOT . '/about';?>">Guest</a>
+                            </li>
 
-                        <li>
-                            <a class="text-white" href="<?php echo URLROOT . '/login';?>">Login</a>
-                        </li>
+                            <li class="my-3 montserrat">
+                                <a class="text-white" href="<?php echo URLROOT . '/login';?>">Login</a>
+                            </li>
 
-                        <li>
-                            <a class="text-white" href="<?php echo URLROOT . '/register';?>">Register</a>
-                        </li>
-                    </ul>
+                            <li class="my-3 montserrat">
+                                <a class="text-white" href="<?php echo URLROOT . '/register';?>">Register</a>
+                            </li>
+                        </ul>
+                    </div>   
                 </div>
 
-                <div class="col-md-4">
-                    <div class="mx-auto">
-                        <h5>Contact Us</h5>
-                        <form action="" class="form" novalidate>
-                            <div class="form-group">
-                                <input type="text" name="" id="" class="form-control">
-                            </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="container">                    
+                        <div class="mx-auto">
+                            <h5 class="text-white fs-1p5em">Contact Us</h5>
+                            <form action="" class="form" novalidate>
+                                <div class="form-group">
+                                    <input type="text" name="" id="" class="form-control">
+                                </div>
 
-                            <div class="form-group">
-                                <input type="email" name="" id="" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
-                            </div>
-                            <input type="submit" value="Send" class="btn btn-block btn-primary">
-                        </form>
-                    </div>     
+                                <div class="form-group">
+                                    <input type="email" name="" id="" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                </div>
+                                <input type="submit" value="Send" class="btn btn-block btn-primary">
+                            </form>
+                        </div>  
+                    </div>   
                 </div>
             </div>
         </div>
-    </div>
-        
+    </div>   
     </footer>
+
     <script src="<?php echo URLROOT;?>/public/js/landing-script.js"></script>
 </body>
 </html>
