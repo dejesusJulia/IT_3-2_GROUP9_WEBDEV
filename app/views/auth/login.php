@@ -1,6 +1,7 @@
 <?php include_once '../app/views/includes/auth-header.php';?>
 
 <div class="container mt-5">
+    <h1 class="text-center">Go to my account</h1>
     <div class="row my-5">
         <div class="col-4 offset-4">
             <div class="d-flex justify-content-center">

@@ -102,10 +102,15 @@
                                     <p><?php echo $post->body;?></p>
 
                                     <?php if($post->img !== null):?>
+                                      <?php if(isset($_SESSION['user']['user_type'])):?>
                                         <div>
                                             <img src="<?php echo $post->img;?>" alt="..." width="50%" class="img-fluid">
                                         </div>
-
+                                      <?php else:?>
+                                        <div>
+                                            <img src="<?php echo str_replace('../public/', '', $post->img);?>" alt="..." width="50%" class="img-fluid">
+                                        </div>
+                                    <?php endif;?>
                                     <?php endif;?>
 
                                     <?php if(isset($_SESSION['user']['user_type'])):?>

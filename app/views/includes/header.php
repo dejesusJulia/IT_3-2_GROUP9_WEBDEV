@@ -67,6 +67,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
 
+            <?php if(isset($_SESSION['user']['user_type'])):?>
             <li class="nav-item" style="margin: 0 auto;">
                 <?php if($_SERVER['REQUEST_URI'] == URLROOT.'/user/timeline?' . $_SESSION['user']['user_id']):?>
                     <h3 class="text-center">TIMELINE</h3>
@@ -74,6 +75,7 @@
                     <h3 class="text-center">HOME</h3>
                 <?php endif;?>
             </li>
+            <?php endif;?>
 
             <?php if(isset($_SESSION['user']['user_type'])):?>
             <li class="nav-item dropdown" style="margin-left:auto">
@@ -98,7 +100,11 @@
         <!-- Brand Logo -->
         <a href="" class="brand-link d-flex justify-content-center">
             <!-- <img src="" alt="" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-            <span class="brand-text font-weight-light"><img src="../public/img/libertadLogo2.svg" alt="logo" style="height:60px"></span>
+            <?php if(isset($_SESSION['user']['user_type'])):?>
+                <span class="brand-text font-weight-light"><img src="../public/img/libertadLogo2.svg" alt="logo" style="height:60px"></span>
+            <?php else:?>
+                <span class="brand-text font-weight-light"><img src="<?php echo URLROOT;?>/public/img/libertadLogo2.svg" alt="logo" style="height:60px"></span>
+            <?php endif;?>
         </a>
 
         <!-- Sidebar -->

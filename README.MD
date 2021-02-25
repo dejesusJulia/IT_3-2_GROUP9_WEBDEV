@@ -73,36 +73,21 @@ $this->views('viewname/without/PHPextenstion', $optionalParameter)
 
 ----------------------------------------------------------------
 ## PROGRESS
-### Front End: 0%
-#### Prototype
+### Front End: 100%
+
+#### Coded
  - [x] landing page
  - [x] login page
  - [x] register page
  - [x] home page (guest)
  - [x] home page (user)
  - [x] timeline page (user)
- - [ ] edit post (user)
- - [ ] profile page 
- - [ ] dashboard (admin)
- - [ ] user-list (admin)
- - [ ] user-edit (admin)
- - [ ] post-list (admin)
- - [ ] post-edit (admin)
-
-#### Coded
- - [ ] landing page
- - [ ] login page
- - [ ] register page
- - [ ] home page (guest)
- - [ ] home page (user)
- - [ ] timeline page (user)
- - [ ] edit post (user)
- - [ ] profile page 
- - [ ] dashboard (admin)
- - [ ] user-list (admin)
- - [ ] user-edit (admin)
- - [ ] post-list (admin)
- - [ ] post-edit (admin)
+ - [x] edit post (user)
+ - [x] profile page 
+ - [x] dashboard (admin)
+ - [x] user-list (admin)
+ - [x] user-edit (admin)
+ - [x] post-edit (admin)
 
 ### Back End: 100%
 #### Users
