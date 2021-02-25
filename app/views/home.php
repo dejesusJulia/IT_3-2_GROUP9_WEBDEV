@@ -69,7 +69,7 @@
 
                               <div class="col-6 d-flex justify-content-end">
                                 <div class="form-group">
-                                  <input type="submit" value="Add Post" class="btn btn-block btn-c-blue" name="add-post">
+                                  <input type="submit" value="Add Post" class="btn btn-block btn-sm btn-c-blue" name="add-post">
                                 </div>
                               </div>
                             </div>

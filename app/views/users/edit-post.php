@@ -15,8 +15,22 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-sm-12 mx-auto"> 
-                    <!-- ALL POSTS -->
-                    
+                    <?php if(isset($_SESSION['successMsg'])):?>
+                    <div class="alert alert-success">
+                      <strong>
+                        <?php echo $_SESSION['successMsg'];?>
+                      </strong>
+                    </div>
+                    <?php unset($_SESSION['successMsg']);?>
+                    <?php elseif(isset($_SESSION['errorMsg'])):?>
+                    <div class="alert alert-danger">
+                      <strong>
+                        <?php echo $_SESSION['errorMsg'];?>
+                      </strong>
+                    </div>
+                    <?php unset($_SESSION['errorMsg']);?>
+                    <?php endif;?>
+                    <!-- POST -->
                     <div class="card shadow p-3 m-2">
                         <div class="row post">
                             <div class="post-image">

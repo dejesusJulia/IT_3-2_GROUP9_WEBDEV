@@ -115,7 +115,7 @@ class Comments extends Controller{
         }
         $data = [
             'comment' => $comment,
-            'errors' => $errors
+            'err' => $errors
         ];
         
         $this->view('edit-comment', $data);
@@ -151,7 +151,7 @@ class Comments extends Controller{
         }
         $data = [
             'comment' => $comment,
-            'errors' => $errors
+            'err' => $errors
         ];
         
         $this->view('edit-comment', $data);

@@ -110,12 +110,25 @@ class Posts extends Controller{
                     $imgLoc = $this->filter()->imageReplace([$img['tmp'], $img['ext']], $oldPost->img);
                     // ADD TO POST 
                     $post['img'] = $imgLoc;
+
                     // INSERT DATA W/ IMAGE TO TABLE 
-                    $this->postModel->updateWithImage($post);
+                    if($this->postModel->updateWithImage($post)){
+                        $_SESSION['successMsg'] = 'Post updated!';
+                    }else{
+                        $_SESSION['errorMsg'] = 'Post update failed';
+                    }
+                       
                 }else{
                     // INSERT DATA W/O TO TABLE
-                    $this->postModel->updateNoImage($post);
+                    if($this->postModel->updateNoImage($post)){
+                        $_SESSION['successMsg'] = 'Post updated!';
+                    }else{
+                        $_SESSION['errorMsg'] = 'Post update failed';
+                    }
+                
                 }
+
+
                 header('Location: ../user/edit-post?'.$i); 
                 die();
             }

@@ -75,23 +75,31 @@ class Post extends Model{
 
     # UPDATE POST WITH IMAGE
     public function updateWithImage($post){
+        $msg = false;
         $this->db->query('UPDATE ' . $this->table . ' SET body=:body, img=:img, show_author=:show_author WHERE post_id =:post_id');
 
         $this->db->bind(":body", $post['body']);
         $this->db->bind(":img", $post['img']);
         $this->db->bind(":show_author", $post['show_author']);
         $this->db->bind(":post_id", $post['post_id']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
     }
 
     # UPDATE POST WITHOUT IMAGE
     public function updateNoImage($post){
+        $msg = false;
         $this->db->query('UPDATE ' . $this->table . ' SET body=:body, show_author=:show_author WHERE post_id =:post_id');
 
         $this->db->bind(":body", $post['body']);
         $this->db->bind(":show_author", $post['show_author']);
         $this->db->bind(":post_id", $post['post_id']);
-        $this->db->executes();
+        if($this->db->executes()){
+            $msg = true;
+        }
+        return $msg;
     }
 
     // ERROR HANDLER

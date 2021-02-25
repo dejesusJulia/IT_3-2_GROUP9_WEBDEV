@@ -72,9 +72,6 @@
                     <h3 class="text-center">TIMELINE</h3>
                 <?php elseif($_SERVER['REQUEST_URI'] == URLROOT.'/user/home'):?>
                     <h3 class="text-center">HOME</h3>
-
-                <?php elseif($_SERVER['REQUEST_URI'] == URLROOT.'/user/edit-post?'.$data['post']->post_id):?>
-                    <h3 class="text-center">EDIT POST</h3>
                 <?php endif;?>
             </li>
 
@@ -178,12 +175,21 @@
                     <?php elseif($_SESSION['user']['user_type'] == 'admin'):?>
                     <li class="nav-item mb-2">
                         <a href="../admin/dashboard" class="nav-link">
-                            <i class="nav-icon fas fa-bolt"></i>
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
                                 Dashboard
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item mb-2">
+                        <a href="../admin/home" class="nav-link">
+                            <i class="nav-icon fas fa-home"></i>
+                            <p>
+                                Posts
+                            </p>
+                        </a>
+                    </li>  
                     
                     <li class="nav-item mb-2">
                         <a href="../profile?<?php echo $_SESSION['user']['user_id'];?>" class="nav-link ">

@@ -15,6 +15,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-sm-12 mx-auto"> 
+                    <?php if($data == null):?>
+                      <div class="d-flex flex-column align-items-center">
+                        <img src="../public/img/undraw_my_feed.svg" alt="You have no posts" width="75%">
+                        <h3>You have no posts yet. Add a <a href="../user/home">new post</a></h3>
+                      </div>
+
+                    <?php else:?>
                     <!-- ALL POSTS -->
                     <?php foreach($data as $post):?>
                     <div class="card shadow p-3 m-2">
@@ -55,6 +62,7 @@
                         </div>
                     </div>
                     <?php endforeach;?>
+                    <?php endif;?>
                 </div>
             </div>
 
