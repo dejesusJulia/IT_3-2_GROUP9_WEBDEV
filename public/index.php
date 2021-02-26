@@ -46,6 +46,11 @@ $core->post('user/post-delete', 'Posts@destroyPost');
 $core->get('admin/dashboard', 'Pages@dash');
 $core->get('admin/home', 'Pages@adminHome');
 
+$core->get('admin/timeline', 'Pages@adminTimeline');
+$core->get('admin/edit-post', 'Pages@adminEditPost');
+$core->post('admin/edit-post', 'Posts@adminUpdatePost');
+$core->post('admin/post-delete', 'Posts@adminDestroyPost');
+
 $core->get('admin/user-list', 'Pages@userList');
 $core->get('admin/user-edit', 'Pages@updateUserTypes');
 $core->post('admin/user-edit', 'Users@updateUserTypes');

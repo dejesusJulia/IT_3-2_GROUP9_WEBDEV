@@ -70,8 +70,24 @@ include_once '../app/views/includes/header.php';
                                                 </small>
                                             <?php endif;?>
                                         </div>
+                                        
+                                        <div class="form-row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-switch">
+                                                    <input type="checkbox" name="show_author" id="show" class="custom-control-input">
+                                                    <label class="custom-control-label" for="show">show user</label>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <input type="submit" value="Add Comment" name="addComment" class="btn btn-sm btn-block btn-c-blue">
+                                            <div class="col-6 d-flex justify-content-end">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Add Comment" name="addComment" class="btn btn-sm btn-block btn-c-blue">
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
                                     </form>
                                 </div>
                             </div>
@@ -94,7 +110,7 @@ include_once '../app/views/includes/header.php';
                             </div>
                             <div class="post-content p-2">
                                  <div>
-                                    <h5><?php echo $comment->username;?></h5>
+                                    <h5><?php echo $comment->show_author == true?$comment->username : 'Anonymous';?></h5>
 
                                     <small><?php echo date('Y F j h:i:s a', strtotime($comment->created_at));?></small>
 

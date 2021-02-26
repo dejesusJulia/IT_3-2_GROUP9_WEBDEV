@@ -65,8 +65,30 @@ include_once '../app/views/includes/header.php';
                                         </small>
                                     <?php endif;?>
                                     </div>
+
+                                    <div class="form-row">
+                                      <div class="col-6">
+                                        <div class="form-group">
+                                          <select name="show_author" id="showauthor" class="form-control">
+                                            <?php
+                                            $anon = 'anonymous'; $user = 'user';
+                                            ?>
+
+                                            <option value="<?php echo $anon;?>" <?php echo $data['comment']->show_author == false ? 'selected' : '';?>>Anonymous</option>
+
+                                            <option value="<?php echo $user;?>" <?php echo $data['comment']->show_author == true ? 'selected' : '';?>><?php echo $_SESSION['user']['username'];?></option>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-6 d-flex justify-content-end">
+                                        <div class="form-group">
+                                          <input type="submit" name="updateComment" value="Update comment" class="btn btn-blocl btn-c-blue">
+                                        </div>
+                                      </div>
+                                    </div>
                                     
-                                    <input type="submit" name="updateComment" value="Update comment" class="btn btn-blocl btn-c-blue">
+                                   
                                     
                                 </form>
                                 </div>

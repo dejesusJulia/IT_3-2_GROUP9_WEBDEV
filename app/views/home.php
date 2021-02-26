@@ -38,7 +38,7 @@
                             <hr>
                             <div class="form-row">
                               <div class="col-6">
-                                <div class="form-group">
+                                <div class="form-group" id="img-group">
                                   <input type="file" name="img" id="form-img" hidden>
                                     <label for="form-img" id="img-lbl" class="btn btn-danger btn-sm">
                                         Photo

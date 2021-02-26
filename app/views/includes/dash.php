@@ -60,8 +60,8 @@
                             </a>
 
                             <a class="nav-link" href="../admin/home">
-                                <div class="sb-nav-link-icon"><i class="fas fa-poll-h"></i></div>
-                                Posts
+                                <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></div>
+                                Blog Page
                             </a>                           
                         </div>
                     </div>

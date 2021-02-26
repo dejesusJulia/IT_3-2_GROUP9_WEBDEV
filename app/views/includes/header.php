@@ -126,16 +126,16 @@
 
                     <li class="nav-item mb-2">
                         <a href="login" class="nav-link">
-                            <i class="nav-icon fas fa-bolt"></i>
+                            <i class="nav-icon far fa-user"></i>
                             <p>
                                 Login
                             </p>
                         </a>
                     </li>
-
+                    
                     <li class="nav-item mb-2">
                         <a href="register" class="nav-link">
-                            <i class="nav-icon fas fa-bolt"></i>
+                            <i class="nav-icon fas fa-sign-in-alt"></i>
                             <p>
                                 Register
                             </p>
@@ -189,10 +189,19 @@
                     </li>
 
                     <li class="nav-item mb-2">
-                        <a href="../admin/home" class="nav-link">
-                            <i class="nav-icon fas fa-home"></i>
+                        <a href="../admin/timeline?<?php echo $_SESSION['user']['user_id'];?>" class="nav-link">
+                            <i class="nav-icon fas fa-bolt"></i>
                             <p>
-                                Posts
+                                Timeline
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a href="../admin/home" class="nav-link">
+                            <i class="nav-icon fas fa-blog"></i>
+                            <p>
+                                All Posts
                             </p>
                         </a>
                     </li>  

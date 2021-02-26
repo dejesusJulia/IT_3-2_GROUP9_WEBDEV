@@ -17,7 +17,12 @@ class Comments extends Controller{
 
         // ON SUBMIT
         if(isset($_POST['addComment'])){
+            
             $data = $_POST;
+            $showAuthor = false;
+            if(isset($_POST['show_author'])){
+                $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            }
             array_pop($data);
             $keys = array_keys($data);
 
@@ -27,9 +32,16 @@ class Comments extends Controller{
 
             // IF THERE ARE NO ERRORS
             if($ctr == 0){
-                if($this->commentModel->insertOne($data)){
+
+                $comment = [
+                    'user_id' => $_POST['user_id'],
+                    'post_id' => $_POST['post_id'],
+                    'comment_body' => filter_var($_POST['comment_body'], FILTER_SANITIZE_STRING),
+                    'show_author' => $showAuthor,
+                ];
+                if($this->commentModel->insertOne($comment)){
                     header('Location: ../user/comment?' . $i);
-                die();
+                    die();
                 }else{
                     $data['errorMsg'] = 'Error in adding comment';
                 }                
@@ -56,6 +68,10 @@ class Comments extends Controller{
         // ON SUBMIT
         if(isset($_POST['addComment'])){
             $data = $_POST;
+            $showAuthor = false;
+            if(isset($_POST['show_author'])){
+                $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            }
             array_pop($data);
             $keys = array_keys($data);
 
@@ -65,7 +81,13 @@ class Comments extends Controller{
 
             // IF THERE ARE NO ERRORS
             if($ctr == 0){
-                if($this->commentModel->insertOne($data)){
+                $comment = [
+                    'user_id' => $_POST['user_id'],
+                    'post_id' => $_POST['post_id'],
+                    'comment_body' => filter_var($_POST['comment_body'], FILTER_SANITIZE_STRING),
+                    'show_author' => $showAuthor,
+                ];
+                if($this->commentModel->insertOne($comment)){
                     header('Location: ../admin/comment?' . $i);
                     die();
                 }else{
@@ -95,6 +117,7 @@ class Comments extends Controller{
             $request = [
                 'comment_body' => $_POST['comment_body']
             ];
+            $showAuthor = $_POST['show_author'] == 'user' ? true : false;
             $keys = array_keys($request);
 
             // FILTER
@@ -102,6 +125,7 @@ class Comments extends Controller{
             $ctr = $this->filter()->errorCounter($errors, $keys);
             if($ctr == 0){
                 $request['comment_id'] = $i;
+                $request['show_author'] = $showAuthor;
                 if($this->commentModel->updateComment($request)){
                     header('Location: ../user/comment?'. $_POST['post_id']);
                     die();
@@ -131,6 +155,7 @@ class Comments extends Controller{
             $request = [
                 'comment_body' => $_POST['comment_body']
             ];
+            $showAuthor = $_POST['show_author'] == 'user' ? true : false;
             $keys = array_keys($request);
 
             // FILTER
@@ -138,6 +163,7 @@ class Comments extends Controller{
             $ctr = $this->filter()->errorCounter($errors, $keys);
             if($ctr == 0){
                 $request['comment_id'] = $i;
+                $request['show_author'] = $showAuthor;
                 if($this->commentModel->updateComment($request)){
                     header('Location: ../admin/comment?'. $_POST['post_id']);
                     die();

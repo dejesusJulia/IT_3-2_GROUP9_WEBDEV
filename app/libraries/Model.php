@@ -83,14 +83,16 @@ class Model{
     public function joinUserCommentsOfPost($postId){
         $this->db->query('SELECT
         c.comment_id,
-        c.comment_body, 
+        c.comment_body,
+        c.show_author, 
         c.created_at, 
         u.user_id,
         u.username, 
         u.avatar
          FROM comments c 
          INNER JOIN users u USING (user_id) 
-         WHERE post_id =:post_id');
+         WHERE post_id =:post_id 
+         ORDER BY c.created_at DESC');
         $this->db->bind(':post_id', $postId);
         $results = $this->db->resultSet();
         return $results;

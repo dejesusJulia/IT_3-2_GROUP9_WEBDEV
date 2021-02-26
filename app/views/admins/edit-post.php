@@ -38,7 +38,7 @@
                             </div>
                             <div class="post-content p-2">
                                  <div>
-                                 <form action="../user/edit-post?<?php echo $data['post']->post_id;?>" method="post" enctype="multipart/form-data" novalidate>
+                                 <form action="../admin/edit-post?<?php echo $data['post']->post_id;?>" method="post" enctype="multipart/form-data" novalidate>
                                     <!-- POST -->
                                     <div class="form-group">
                                     <textarea name="body" id="post-body" cols="30" rows="3" class="form-control" style="border: 0;" placeholder="What's on your mind?"><?php echo $data['post']->body;?></textarea>
@@ -53,13 +53,13 @@
                                     <hr>
                                     <div class="form-row">
                                     <div class="col-6">
-                                        <div class="form-group" id="img-group-u">
-                                        <input type="file" name="img" id="form-img-u" hidden>
-                                            <label for="form-img-u" id="img-lbl" class="btn btn-danger btn-sm">
+                                        <div class="form-group" id="img-group-a">
+                                        <input type="file" name="img" id="form-img-a" hidden>
+                                            <label for="form-img-a" id="img-lbl" class="btn btn-danger btn-sm">
                                                 Photo
                                             </label>
 
-                                            <span id="img-name-u" class="text-muted"></span> 
+                                            <span id="img-name-a" class="text-muted"></span> 
                                             <!-- ERROR HANDLER IMG -->
                                             <?php if(isset($data['err']['img']['errors'][0])):?>
                                             <small class="text-danger">
@@ -138,14 +138,15 @@
   <!-- AdminLTE App -->
   <script src="<?php echo URLROOT;?>/public/assets/js/adminlte.js"></script>
   <script>
-    var imgU = document.getElementById('img-group-u');
-    imgU.addEventListener('change', showFileU);
-    function showFileU(e){
-    var fileName = document.getElementById('form-img-u').files[0].name;
-    document.getElementById('img-name-u').innerText = fileName;
+    var imgA = document.getElementById('img-group-a');
+
+    imgA.addEventListener('change', showFileA);
+
+    function showFileA(e){
+        var fileName = document.getElementById('form-img-a').files[0].name;
+        document.getElementById('img-name-a').innerText = fileName;
     }
   </script>
-
 
 </body>
 

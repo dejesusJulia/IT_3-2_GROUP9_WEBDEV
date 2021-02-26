@@ -33,10 +33,11 @@ class Comment extends Model{
     # INSERT ONE COMMENT
     public function insertOne($comment){
         $msg = false;
-        $this->db->query('INSERT INTO '. $this->table . '(user_id, post_id, comment_body) VALUES(:user_id, :post_id, :comment_body)');
+        $this->db->query('INSERT INTO '. $this->table . '(user_id, post_id, comment_body, show_author) VALUES(:user_id, :post_id, :comment_body, :show_author)');
         $this->db->bind(':user_id', $comment['user_id']);
         $this->db->bind(':post_id', $comment['post_id']);
         $this->db->bind(':comment_body', $comment['comment_body']);
+        $this->db->bind(':show_author', $comment['show_author']);
         if($this->db->executes()){
             $msg = true;
         }
@@ -58,8 +59,9 @@ class Comment extends Model{
     # UPDATE POST
     public function updateComment($comment){  
         $msg = false;   
-        $this->db->query('UPDATE ' . $this->table . ' SET comment_body = :comment_body WHERE comment_id = :comment_id');
+        $this->db->query('UPDATE ' . $this->table . ' SET comment_body = :comment_body, show_author = :show_author WHERE comment_id = :comment_id');
         $this->db->bind(':comment_body', $comment['comment_body']);
+        $this->db->bind(':show_author', $comment['show_author']);
         $this->db->bind(':comment_id', $comment['comment_id']);
         if($this->db->executes()){
             $msg = true;

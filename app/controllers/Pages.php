@@ -141,6 +141,29 @@ class Pages extends Controller{
         $this->view('admins/dashboard', $data);
         
     }   
+
+    # DEFAULT ADMIN TIMELINE
+    public function adminTimeline($i){
+        session_start();
+        // $posts holds all the post of one user
+        $posts = $this->postModel->getUserPost($i);
+        $this->view('admins/timeline', $posts);
+    }
+
+    # ADMIN PAGES - EDIT POST
+    public function adminEditPost($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: ../home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $post = $this->postModel->getPost($i);
+        $data = ['post' => $post];
+        $this->view('admins/edit-post', $data);
+    }    
     
     # ADMIN PAGE - USER LIST
     public function userList(){
