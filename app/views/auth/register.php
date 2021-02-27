@@ -11,6 +11,15 @@
         </div>
         <div class="row my-5">
             <div class="col-4 offset-4">
+                <?php if(isset($data['warningMessage'])):?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><?php echo $data['warningMessage'];?></strong>
+                        <button class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                <?php 
+                    unset($data['warningMessage']);
+                    endif;
+                ?>
                 <form action="register" method="post" novalidate>
                     <div class="form-group">
                         <input type="text" name="username" id="user-name" placeholder="username" class="form-control">

@@ -177,7 +177,11 @@ class Pages extends Controller{
             die();
         }
         $users = $this->userModel->all();
-        $this->view('admins/user-list', $users);
+        $data = [
+            'superAdmin' => 'admin@gmail.com',
+            'users' => $users
+        ];
+        $this->view('admins/user-list', $data);
     }  
 
     # UPDATE USER TYPE GET REQUEST

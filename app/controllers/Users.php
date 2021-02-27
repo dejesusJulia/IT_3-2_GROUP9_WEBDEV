@@ -77,9 +77,14 @@ class Users extends Controller{
             
             // IF THERE ARE NO ERRORS IN FILTER
             if($ctr == 0){
-                $unique = $this->userModel->getOne($data['user_email']);
-                if($unique !== false){
+                $uniqueEmail = $this->userModel->getOne($data['user_email']);
+                $uniqueUsername = $this->userModel->getOneName($data['username']);
+                if($uniqueEmail !== false){
                     $errors['warningMessage'] = 'Email is taken. Please enter a new email.';
+
+                }else if($uniqueUsername !== false){
+                    $errors['warningMessage'] = 'Username is taken. Please enter a new email.';
+
                 }else{
                     // if registration is successful
                     if($this->userModel->insertOne($data)){

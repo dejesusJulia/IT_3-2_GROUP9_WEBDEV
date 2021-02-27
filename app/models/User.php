@@ -19,10 +19,15 @@ class User extends Model{
         return $users;
     }
 
-    // THIS FUNCTION IS YET TO BE TESTED. SIMILAR TO getUser()
+    # SELECT AN EMAIL
     public function getOne($value){
-        $this->colName = 'user_email';
         $user = $this->selectOne($this->table, 'user_email', $value);
+        return $user;
+    }
+
+    # SELECT A USERNAME
+    public function getOneName($value){
+        $user = $this->selectOne($this->table, 'username', $value);
         return $user;
     }
 

@@ -185,14 +185,14 @@
                             <h5 class="text-white fs-1p5em">Contact Us</h5>
                             <form action="" class="form" novalidate>
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control">
+                                    <input type="text" name="" id="" class="form-control" placeholder="Name">
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="email" name="" id="" class="form-control">
+                                    <input type="email" name="" id="" class="form-control" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="" id="" cols="30" rows="10" class="form-control" placeholder="Message"></textarea>
                                 </div>
                                 <input type="submit" value="Send" class="btn btn-block btn-primary">
                             </form>

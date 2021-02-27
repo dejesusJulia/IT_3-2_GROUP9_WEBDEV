@@ -36,8 +36,8 @@ include_once '../app/views/includes/dash.php';
 
                                 <tbody>
                                 <?php
-                                    foreach($data as $col):
-                                    if($col->user_id !== $_SESSION['user']['user_id']):
+                                    foreach($data['users'] as $col):
+                                    if($col->user_id !== $_SESSION['user']['user_id'] && $col->user_email !== $data['superAdmin']):
                                 ?>
                                 <tr>
                                     <td><?php echo $col->user_id;?></td>
@@ -55,8 +55,20 @@ include_once '../app/views/includes/dash.php';
 
                                     <form action="../admin/user-delete?<?php echo $col->user_id;?>" method="post" id="user-delete-<?php echo $col->user_id;?>" style="display: none;"></form>
                                     </td>
+
                                 </tr>
-                                <?php else:?>
+
+                                <?php elseif($col->user_id !== $_SESSION['user']['user_id'] && $col->user_email == $data['superAdmin']):?> 
+
+                                <tr>
+                                    <td><?php echo $col->user_id;?></td>
+                                    <td><?php echo $col->username;?></td>
+                                    <td><?php echo $col->user_email;?></td>
+                                    <td><?php echo $col->user_type;?></td>
+                                    <td>SUPER ADMIN</td>
+                                </tr>
+
+                                <?php elseif($col->user_id == $_SESSION['user']['user_id']):?>
                                 <tr>
                                     <td><?php echo $col->user_id;?></td>
                                     <td><?php echo $col->username;?></td>
@@ -68,6 +80,8 @@ include_once '../app/views/includes/dash.php';
                                     </a>
                                     </td>
                                 </tr>
+                                
+
                                 <?php
                                     endif;
                                     endforeach;

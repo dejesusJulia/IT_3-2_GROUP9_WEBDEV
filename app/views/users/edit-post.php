@@ -16,18 +16,24 @@
             <div class="row">
                 <div class="col-md-10 col-sm-12 mx-auto"> 
                     <?php if(isset($_SESSION['successMsg'])):?>
-                    <div class="alert alert-success">
+
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                       <strong>
                         <?php echo $_SESSION['successMsg'];?>
                       </strong>
+                      <button class="close" data-dismiss="alert">&times;</button>
                     </div>
+
                     <?php unset($_SESSION['successMsg']);?>
                     <?php elseif(isset($_SESSION['errorMsg'])):?>
-                    <div class="alert alert-danger">
+
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                       <strong>
                         <?php echo $_SESSION['errorMsg'];?>
                       </strong>
+                      <button class="close" data-dismiss="alert">&times;</button>
                     </div>
+
                     <?php unset($_SESSION['errorMsg']);?>
                     <?php endif;?>
                     <!-- POST -->

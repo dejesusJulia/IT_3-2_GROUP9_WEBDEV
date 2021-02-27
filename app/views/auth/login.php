@@ -14,8 +14,9 @@
         <div class="col-4 offset-4">
             <!-- ERROR MESSAGE -->
             <?php if(isset($data['message'])):?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong><?php echo $data['message'];?></strong>
+                    <button class="close" data-dismiss="alert">&times;</button>
                 </div>  
             <?php 
             unset($data['message']);
@@ -44,6 +45,7 @@
                 
                 <input type="submit" value="login" name="login" id="submit" class="btn btn-primary btn-block">
             </form>
+            <p>Don't have an account? <a href="register">Register now.</a></p>
         </div>
     </div>
 </div>
