@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <input type="text" name="user_email" id="user-email" placeholder="email" class="form-control">
                     <?php if(isset($data['user_email']['errors']['0'])):?>
-                        <small class="invalid-feedback">
+                        <small class="text-danger">
                         <?php echo $data['user_email']['errors']['0'];?>
                         </small>
                     <?php endif;?>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <input type="password" name="password" id="user-pass" placeholder="password" class="form-control">
                     <?php if(isset($data['password']['errors']['0'])):?>
-                        <small class="invalid-feedback">
+                        <small class="text-danger">
                         <?php echo $data['password']['errors']['0'];?>
                         </small>
                     <?php endif;?>

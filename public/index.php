@@ -24,9 +24,6 @@ $core->get('user', 'Pages@userAuth');
 $core->get('home', 'Pages@home');
 
 
-// $core->get('post', 'Pages@viewPost');
-// $core->post('search-results', 'Pages@searchResults');
-
 ### AUTH ###
 $core->get('login', 'Pages@login');
 $core->post('login', 'Users@login');
