@@ -13,45 +13,32 @@
                 <div class="row m-5">
                     <div class="col-4 offset-4">
                     <!-- ALERT MESSAGES -->
-                    <?php if(isset($data['successMsg'])):?>
+                    <?php if(isset($_SESSION['successMsg'])):?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <?php echo $data['successMsg'] ?? '';?>
+                        <?php echo $_SESSION['successMsg'] ?? '';?>
                         <button class="close" data-dismiss="alert">&times;</button>
                     </div>
-                    <?php unset($data['successMsg']);?>
-                    <?php elseif(isset($data['errorMsg'])):?>
+                    <?php unset($_SESSION['successMsg']);?>
+
+                    <?php elseif(isset($_SESSION['errorMsg'])):?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <?php echo $data['errorMsg'] ?? '';?>
+                        <?php echo $_SESSION['errorMsg'] ?? '';?>
                         <button class="close" data-dismiss="alert">&times;</button>
                     </div>
-                    <?php unset($data['errorMsg']);?>
+                    <?php unset($_SESSION['errorMsg']);?>
                     <?php endif;?>
 
                         <div class="card">
                             <div class="card-body">
-                                <form action="user-edit?<?php echo $data['userData']->user_id;?>" method="post" class="form">
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                            <p><?php echo $data['userData']->username;?></p>
-                                        </div>
-                                    </div>
+                                <form action="../admin/tag-edit?<?php echo $data['tagData']->tag_id;?>" method="post" class="form">
 
-                                    <div class="form-group row">
-                                        <div class="col-sm-10">
-                                            <p><?php echo $data['userData']->user_email;?></p>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="tag-name">Description</label>
+                                        <input type="text" name="tag_name" id="tag-name" class="form-control" placeholder="e.g., funny" value="<?php echo $data['tagData']->tag_name;?>">
                                     </div>
 
                                     <div class="form-group">
-                                        <select name="user_type" id="userType" class="custom-select">
-                                            <option value="<?php echo $data['user'];?>" <?php echo $data['user'] == $data['userData']->user_type? 'selected': '';?>>User</option>
-
-                                            <option value="<?php echo $data['admin'];?>" <?php echo $data['admin'] == $data['userData']->user_type? 'selected': '';?>>Admin</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="submit" value="Update" class="btn btn-primary btn-block" name="updateUserType">
+                                        <input type="submit" value="Update" class="btn btn-primary btn-block" name="updateTag">
                                     </div>
                                 </form>
                             </div>

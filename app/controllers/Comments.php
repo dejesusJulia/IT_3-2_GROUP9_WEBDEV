@@ -6,6 +6,7 @@ class Comments extends Controller{
     {
         $this->commentModel = $this->model('Comment');
         $this->postModel = $this->model('Post');
+        $this->categoryModel = $this->model('Category');
     }
 
     # ADD USER COMMENT
@@ -111,13 +112,17 @@ class Comments extends Controller{
     public function updateUserComment($i){
         session_start();
         $comment = $this->commentModel->getComment($i);
+        $categs = $this->categoryModel->joinCategoriesTags();
         $errors = $this->commentModel->commentErrors();
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){            
             $request = [
                 'comment_body' => $_POST['comment_body']
             ];
-            $showAuthor = $_POST['show_author'] == 'user' ? true : false;
+            $showAuthor = false;
+            if(isset($_POST['show_author'])){
+                $showAuthor = $_POST['show_author'] == 'on' ? true : false;
+            }
             $keys = array_keys($request);
 
             // FILTER
@@ -139,7 +144,8 @@ class Comments extends Controller{
         }
         $data = [
             'comment' => $comment,
-            'err' => $errors
+            'err' => $errors, 
+            'categs' => $categs
         ];
         
         $this->view('edit-comment', $data);
@@ -149,6 +155,7 @@ class Comments extends Controller{
     public function updateAdminComment($i){
         session_start();
         $comment = $this->commentModel->getComment($i);
+        $categs = $this->categoryModel->joinCategoriesTags();
         $errors = $this->commentModel->commentErrors();
         
         if($_SERVER['REQUEST_METHOD'] == 'POST'){            
@@ -177,7 +184,8 @@ class Comments extends Controller{
         }
         $data = [
             'comment' => $comment,
-            'err' => $errors
+            'err' => $errors, 
+            'categs' => $categs
         ];
         
         $this->view('edit-comment', $data);

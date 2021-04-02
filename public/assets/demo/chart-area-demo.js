@@ -4,14 +4,26 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
+// DATE LABELS
+var date = new Date();
+var month = date.toLocaleString('default', {month:'short'});
+var date1 = month + ' 1';
+var date2 = month + ' 10';
+var date3 = month + ' 20';
+var lastDay = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
+var date4 = month + ' ' + lastDay;
+
+
+// DATA
 var wkOne = document.getElementById('wkOne').value;
 var wkTwo = document.getElementById('wkTwo').value;
 var wkThree = document.getElementById('wkThree').value;
+var wkFour = document.getElementById('wkFour').value;
 
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Feb 01", "Feb 15", "Feb 22"],
+    labels: [date1, date2, date3, date4],
     datasets: [{
       label: "Posts",
       lineTension: 0.3,
@@ -24,7 +36,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBackgroundColor: "rgba(2,117,216,1)",
       pointHitRadius: 50,
       pointBorderWidth: 2,
-      data: [wkOne, wkTwo, wkThree],
+      data: [wkOne, wkTwo, wkThree, wkFour],
     }],
   },
   options: {

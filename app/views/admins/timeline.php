@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-sm-12 mx-auto"> 
-                    <?php if($data == null):?>
+                    <?php if($data['posts'] == null):?>
                       <div class="d-flex flex-column align-items-center">
                         <img src="../public/img/undraw_my_feed.svg" alt="You have no posts" width="75%">
                         <h3>You have no posts yet. Add a <a href="../user/home">new post</a></h3>
@@ -23,7 +23,7 @@
 
                     <?php else:?>
                     <!-- ALL POSTS -->
-                    <?php foreach($data as $post):?>
+                    <?php foreach($data['posts'] as $post):?>
                     <div class="card shadow p-3 m-2">
                         <div class="row post">
                             <div class="post-image">
@@ -43,6 +43,17 @@
                                         </div>
 
                                     <?php endif;?>
+
+                                    <div>
+                                      <small>Topics: </small>
+                                      <?php foreach($data['categs'] as $categs):?>
+                                      <?php if($categs->post_id == $post->post_id):?>
+                                      <small>
+                                        <?php echo $categs->tag_name;?>
+                                      </small>
+                                      <?php endif;?>
+                                      <?php endforeach;?>
+                                    </div>
 
                                     <a class="px-2" href="../admin/edit-post?<?php echo $post->post_id;?>">
                                         <i class="fas fa-edit"></i>

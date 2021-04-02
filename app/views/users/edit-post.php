@@ -1,158 +1,131 @@
-<?php include_once '../app/views/includes/header.php';?>
-    
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
+<?php
+include_once '../app/views/includes/header.php';
+?>
+        <main>  
+            <div class="container p-3">
+                <!-- ALERTS -->
+                <?php if(isset($_SESSION['successMsg'])):?>
+                <div class="col-8 offset-2 alert alert-success alert-dismissible fade show" role="alert" style="width: inherit;">
+                    <strong><?php echo $_SESSION['successMsg'];?></strong>
+                    <button class="close" data-dismiss="alert">&times;</button>
+                </div>
+                <?php unset($_SESSION['successMsg']);?>
 
-      <!-- Main content -->
+                <?php elseif(isset($_SESSION['errorMsg'])):?>
+                <div class=" col-8 offset-2 alert alert-danger alert-dismissible fade show" role="alert" style="width: inherit;">
+                    <strong><?php echo $_SESSION['errorMsg'];?>.</strong>
+                    <button class="close" data-dismiss="alert">&times;</button>
+                </div>
+                <?php unset($_SESSION['errorMsg']);?>
+                
+                <?php endif;?>
 
-      <section class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-sm-12 mx-auto"> 
-                    <?php if(isset($_SESSION['successMsg'])):?>
+                <!-- UPDATE FORM -->
+                <div class="col-8 offset-2 bg-secondary p-3 mb-2 rounded text-white">
+                    <h4 class="text-center">Update Post</h4>
+                </div>
 
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                      <strong>
-                        <?php echo $_SESSION['successMsg'];?>
-                      </strong>
-                      <button class="close" data-dismiss="alert">&times;</button>
-                    </div>
-
-                    <?php unset($_SESSION['successMsg']);?>
-                    <?php elseif(isset($_SESSION['errorMsg'])):?>
-
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                      <strong>
-                        <?php echo $_SESSION['errorMsg'];?>
-                      </strong>
-                      <button class="close" data-dismiss="alert">&times;</button>
-                    </div>
-
-                    <?php unset($_SESSION['errorMsg']);?>
-                    <?php endif;?>
-                    <!-- POST -->
-                    <div class="card shadow p-3 m-2">
-                        <div class="row post">
-                            <div class="post-image">
-                                <img src="../public/<?php echo $_SESSION['user']['avatar'];?>" class="rounded-circle profile-image" width="50" alt="profle">
+                <div class="col-8 offset-2">
+                    <!-- FORM -->
+                    <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="row no-gutters">
+                            <div class="col-md-6">
+                                <div>
+                                    <img src="<?php echo $data['post']->img ?? URLROOT . '/public/img/image-placeholder-icon-19.jpg';?>" alt="post image" width="90%" id="img-edit-show">
+                                </div>
                             </div>
-                            <div class="post-content p-2">
-                                 <div>
-                                 <form action="../user/edit-post?<?php echo $data['post']->post_id;?>" method="post" enctype="multipart/form-data" novalidate>
-                                    <!-- POST -->
+                            <div class="col-md-6">
+                                <form action="../user/edit-post?<?php echo $data['post']->post_id;?>" method="post" novalidate enctype="multipart/form-data">
+                                    <!-- BODY -->
                                     <div class="form-group">
-                                    <textarea name="body" id="post-body" cols="30" rows="3" class="form-control" style="border: 0;" placeholder="What's on your mind?"><?php echo $data['post']->body;?></textarea>
-                                    <!-- ERROR HANDLER BODY -->
-                                    <?php if(isset($data['err']['body']['errors'][0])):?>
+                                        <textarea name="body" id="body" cols="30" rows="3" class="form-control" placeholder="Your post here"><?php echo $data['post']->body;?></textarea>
+
+                                        <!-- ERROR HANDLER -->
+                                        <?php if(isset($data['err']['body']['errors'][0])):?>
                                         <small class="text-danger">
-                                        <?php echo $data['err']['body']['errors'][0];?>
+                                            <?php echo $data['err']['body']['errors'][0];?>
                                         </small>
-                                    <?php endif;?>
+                                        <?php endif;?>
                                     </div>
 
-                                    <hr>
-                                    <div class="form-row">
-                                    <div class="col-6">
-                                        <div class="form-group" id="img-group-u">
-                                        <input type="file" name="img" id="form-img-u" hidden>
-                                            <label for="form-img-u" id="img-lbl" class="btn btn-danger btn-sm">
-                                                Photo
-                                            </label>
+                                    <!-- IMAGE -->
+                                    <div class="form-group" id="img-edit-group">
+                                        <input type="file" name="img" id="edit-img" hidden>
 
-                                            <span id="img-name-u" class="text-muted"></span> 
-                                            <!-- ERROR HANDLER IMG -->
-                                            <?php if(isset($data['err']['img']['errors'][0])):?>
-                                            <small class="text-danger">
-                                            <?php echo $data['err']['img']['errors'][0];?>  
-                                            </small>
-                                            <?php endif;?>
+                                        <label for="edit-img" class="btn btn-danger btn-sm">Photo</label>
+   
+                                        <span class="text-muted" id="img-edit-name"><?php echo str_replace('../public/img/posts/', '', $data['post']->img) ?? '';?></span>
+                                       
+                                        <!-- ERROR HANDLER -->
+                                        <?php if(isset($data['err']['img']['errors'][0])):?>
+                                        <small class="text-danger">
+                                            <?php echo $data['err']['img']['errors'][0];?>
+                                        </small>
+                                        <?php endif;?>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <?php foreach($data['tags'] as $tags):?>
+                                        <div class="form-check form-check-inline">
+                                            <input type="checkbox" name="tagName[]" id="<?php echo $tags->tag_id;?>" class="form-check-input" value="<?php echo $tags->tag_id;?>" <?php echo in_array($tags->tag_id, $data['categs']) ? 'checked': '';?>>
+
+                                            <label for="<?php echo $tags->tag_id;?>" class="form-check-label"><?php echo $tags->tag_name;?></label>
                                         </div>
+                                        <?php endforeach;?>
+                                        <?php if(isset($data['cbErr'])):?>
+                                            <small class="text-danger">
+                                                <?php echo $data['cbErr'];?>
+                                            </small>
+                                        <?php endif;?>
                                     </div>
-                                    </div>
-                                    
+
                                     <input type="hidden" name="user_id" value="<?php echo $data['post']->user_id;?>">
-                                    
+
                                     <div class="form-row">
-                                      <div class="col-6">
-                                          <div class="form-group">
-                                          <select class="form-control" name="show_author" id="showAuthor">
-                                          <?php
-                                          $anon = 'anonymous'; $user = 'user';
-                                          ?>
-                                              <option value="<?php echo $anon;?>" <?php echo $data['post']->show_author == false ? 'selected' : '';?>>Anonymous</option>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                            <?php
+                                                $checkAttr = $data['post']->show_author == true ? 'checked' : '';
+                                            ?>
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" name="show_author" id="show" class="custom-control-input" <?php echo $checkAttr;?>>
+                                                    <label for="show" class="custom-control-label">Show author</label>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                              <option value="<?php echo $user;?>" <?php echo $data['post']->show_author == true ? 'selected' : '';?>><?php echo $_SESSION['user']['username'];?></option>
-                                          </select>
-                                          </div>
-                                      </div>
-
-                                      <div class="col-6 d-flex justify-content-end">
-                                          <div class="form-group">
-                                            <input type="submit" value="Update post" class="btn btn-block btn-c-blue" name="update-post">
-                                          </div>
-                                      </div>
+                                        <div class="col-6 d-flex justify-content-end">
+                                            <div class="form-group">
+                                                <input type="submit" value="Update" class="btn btn-primary btn-sm" name="update-post">
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </form>
-                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </div>
+        </main>
 
-        </div><!-- /.container-fluid -->
-      </section>
+        <!--===== MAIN JS =====-->
+        <script src="<?php echo URLROOT;?>/public/js/main.js"></script>
+        <script src="<?php echo URLROOT;?>/public/js/custom.js"></script>
+        <script>
+            var imgEdit = document.getElementById('img-edit-group');
+            imgEdit.addEventListener('change', showFileEdit);
+            function showFileEdit(e){
+                var imgFile = document.getElementById('edit-img');
+                var fileName = document.getElementById('edit-img').files[0].name; 
+                var reader = new FileReader();
+                reader.onload = function(){
+                    document.getElementById('img-edit-show').src = reader.result;
+                    document.getElementById('img-edit-name').innerText = fileName;
+                }
+                reader.readAsDataURL(e.target.files[0]);
 
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; <?php echo date('Y');?> <span class="text-info"></span>LIBERTAD</span></strong>
-      All rights reserved.
-
-    </footer>
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-  </div>
-  <!-- ./wrapper -->
-
-  <!-- jQuery -->
-  <script src="<?php echo URLROOT;?>/public/assets/js/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="<?php echo URLROOT;?>/public/assets/js/jquery-ui.min.js"></script>
-  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-  <script>
-    $.widget.bridge('uibutton', $.ui.button)
-  </script>
-  <!-- Bootstrap 4 -->
-  <script src="<?php echo URLROOT;?>/public/assets/js/bootstrap.bundle.min.js"></script>
-
-  <!-- overlayScrollbars -->
-  <script src="<?php echo URLROOT;?>/public/assets/js/jquery.overlayScrollbars.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?php echo URLROOT;?>/public/assets/js/adminlte.js"></script>
-  <script>
-    var imgU = document.getElementById('img-group-u');
-    imgU.addEventListener('change', showFileU);
-    function showFileU(e){
-    var fileName = document.getElementById('form-img-u').files[0].name;
-    document.getElementById('img-name-u').innerText = fileName;
-    }
-  </script>
-
-
-</body>
-
+            }
+        </script>
+    </body>
 </html>

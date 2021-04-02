@@ -22,7 +22,7 @@ $core = new Core();
 $core->get('index', 'Pages@logout');
 $core->get('user', 'Pages@userAuth');
 $core->get('home', 'Pages@home');
-
+$core->get('posts/topics', 'Categories@selectAllByTag');
 
 ### AUTH ###
 $core->get('login', 'Pages@login');
@@ -33,6 +33,8 @@ $core->post('register', 'Users@register');
 ### USERS ###
 $core->get('user/timeline', 'Pages@userTimeline');
 $core->get('user/home', 'Pages@userHome');
+$core->get('user/posts', 'Categories@selectAllByTagUser');
+$core->get('user/timeline/posts', 'Categories@selectByTagUser');
 
 $core->post('user/home', 'Posts@addPost');
 $core->get('user/edit-post', 'Pages@editPost');
@@ -42,6 +44,8 @@ $core->post('user/post-delete', 'Posts@destroyPost');
 ### ADMIN ###
 $core->get('admin/dashboard', 'Pages@dash');
 $core->get('admin/home', 'Pages@adminHome');
+$core->get('admin/posts', 'Categories@selectAllByTagAdmin');
+$core->get('admin/timeline/posts', 'Categories@selectByTagAdmin');
 
 $core->get('admin/timeline', 'Pages@adminTimeline');
 $core->get('admin/edit-post', 'Pages@adminEditPost');
@@ -52,6 +56,12 @@ $core->get('admin/user-list', 'Pages@userList');
 $core->get('admin/user-edit', 'Pages@updateUserTypes');
 $core->post('admin/user-edit', 'Users@updateUserTypes');
 $core->post('admin/user-delete', 'Users@destroyUser');
+
+$core->get('admin/tag-list', 'Pages@tagList');
+$core->post('admin/tag-list', 'Tags@addTag');
+$core->get('admin/tag-edit', 'Pages@updateTag');
+$core->post('admin/tag-edit', 'Tags@updateTag');
+$core->post('admin/tag-delete', 'Tags@destroyTag');
 
 ### SHARED PAGES ###
 ## ADD POST ##

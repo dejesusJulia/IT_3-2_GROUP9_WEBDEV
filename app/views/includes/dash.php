@@ -59,6 +59,11 @@
                                 Users List
                             </a>
 
+                            <a class="nav-link" href="../admin/tag-list">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Tags List
+                            </a>
+
                             <a class="nav-link" href="../admin/home">
                                 <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></div>
                                 Blog Page

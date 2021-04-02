@@ -75,20 +75,29 @@
                                         </div>
                                     </div>
                                     </div>
+
+                                    <div class="form-group">
+                                    <?php foreach($data['tags'] as $tags):?>
+                                      <div class="form-check form-check-inline">
+                                        <input type="checkbox" name="tagName[]" id="<?php echo $tags->tag_id;?>" class="form-check-input" value="<?php echo $tags->tag_id;?>" <?php echo in_array($tags->tag_id, $data['categs']) ? 'checked': '';?>>
+
+                                        <label for="<?php echo $tags->tag_id;?>" class="form-check-label"><?php echo $tags->tag_name;?></label>
+                                      </div>
+                                    <?php endforeach;?>
+                                    </div>
                                     
                                     <input type="hidden" name="user_id" value="<?php echo $data['post']->user_id;?>">
                                     
                                     <div class="form-row">
                                       <div class="col-6">
                                           <div class="form-group">
-                                          <select class="form-control" name="show_author" id="showAuthor">
                                           <?php
-                                          $anon = 'anonymous'; $user = 'user';
+                                          $checkAttr = $data['post']->show_author == true ? 'checked' : '';
                                           ?>
-                                              <option value="<?php echo $anon;?>" <?php echo $data['post']->show_author == false ? 'selected' : '';?>>Anonymous</option>
-
-                                              <option value="<?php echo $user;?>" <?php echo $data['post']->show_author == true ? 'selected' : '';?>><?php echo $_SESSION['user']['username'];?></option>
-                                          </select>
+                                          <div class="custom-control custom-switch">
+                                              <input type="checkbox" name="show_author" id="show" class="custom-control-input" <?php echo $checkAttr;?>>
+                                              <label for="show" class="custom-control-label">Show User</label>
+                                          </div>
                                           </div>
                                       </div>
 

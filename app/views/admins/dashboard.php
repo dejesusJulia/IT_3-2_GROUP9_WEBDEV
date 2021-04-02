@@ -68,6 +68,8 @@ include_once '../app/views/includes/dash.php';
                                         <input type="hidden" id="wkTwo" value="<?php echo $data['weekTwo'];?>">
 
                                         <input type="hidden" id="wkThree" value="<?php echo $data['weekThree'];?>">
+
+                                        <input type="hidden" id="wkFour" value="<?php echo $data['weekFour'];?>">
                                     </div>
                                 </div>
                             </div>

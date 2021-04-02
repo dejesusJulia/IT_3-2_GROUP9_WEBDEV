@@ -97,6 +97,37 @@ class Model{
         $results = $this->db->resultSet();
         return $results;
     }
+
+    # COUNT POSTS OF A TAG THRU CATEGORIES
+    // public function joinTagsCategories(){
+    //     $this->db->query('SELECT 
+    //     t.tag_id, 
+    //     t.tag_name, 
+    //     COUNT(c.post_id) AS postCount 
+    //     FROM tags t INNER JOIN categories c 
+    //     GROUP BY t.tag_id');
+
+    //     $results = $this->db->resultSet();
+    //     return $results;
+    // }
+
+    # LIKES OF A POST
+    public function joinPostLikes(){
+        $this->db->query('SELECT 
+        p.post_id, 
+        p.body, 
+        p.img, 
+        p.show_author, 
+        p.created_at, 
+        l.like_id
+         FROM posts p INNER JOIN likes l  
+         ON p.post_id = l.post_id 
+         ORDER BY p.created_at DESC
+        ');
+        $result = $this->db->resultSet();
+
+        return $result;
+    }
     
     # SET UP ERROR HANDLER
     public function errorHandler($columns){

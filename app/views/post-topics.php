@@ -33,7 +33,7 @@
                                 <?php foreach($data['tags'] as $tag):?>
                                 <div class="col-lg-6 col-md-12 col-sm-4">
                                 
-                                    <a href="posts/topics?<?php echo $tag->tag_name;?>">
+                                    <a href="../posts/topics?<?php echo $tag->tag_name;?>">
                                         <?php echo $tag->tag_name;?>
                                     </a>
                                 </div>
@@ -44,86 +44,6 @@
                     </div>
 
                     <div class="col-lg-9 col-md-9 col-sm-12 order-lg-1 order-md-1 order-sm-2">
-                        <?php if(isset($_SESSION['user']['user_type'])):?>
-                        <div class="shadow-lg p-3 mb-3 bg-white rounded">
-                            <div class="d-flex">
-                                <div style="flex: 1;">
-                                    <img src="../public/<?php echo $_SESSION['user']['avatar'];?>" alt="..." width="50">
-                                </div>
-                                <div style="flex: 11;">
-                                    <form action="../user/home" method="post" novalidate enctype="multipart/form-data">
-                                        <!-- TEXT BODY -->
-                                        <div class="form-group">
-                                            <textarea name="body" id="post-body" cols="30" rows="3" class="form-control" placeholder="What's on your mind?" style="border: 0;"><?php echo $_POST['body'] ?? ''?></textarea>
-                                            
-                                            <!-- ERROR HANDLER -->
-                                            <?php if(isset($data['err']['body']['errors'][0])):?>
-                                            <small class="text-danger">
-                                                <?php echo $data['err']['body']['errors'][0];?>
-                                            </small>
-                                            <?php endif;?>
-                                        </div>
-                    
-                                        <!-- IMAGE UPLOAD -->
-                                        <div class="form-group" id="img-group">
-                                            <input type="file" name="img" id="form-img" hidden>
-                                            <label for="form-img" class="btn btn-sm btn-primary">Photo</label>
-
-                                            <span class="text-mute" id="img-name"></span>
-                    
-                                            <!-- ERROR HANDLER -->
-                                            <?php if(isset($data['err']['img']['errors'][0])):?>
-                                            <small class="text-danger">
-                                                <?php echo $data['err']['img']['errors'][0];?>  
-                                            </small>
-                                            <?php endif;?>
-                                        </div>
-                    
-                                        <!-- TAG CHECKBOXES -->
-                                        <div class="form-group">
-                                            <?php foreach($data['tags'] as $tags):?>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" name="tagName[]" id="<?php echo $tags->tag_id;?>" class="form-check-input" value="<?php echo $tags->tag_id;?>">
-
-                                                <label for="<?php echo $tags->tag_id;?>" class="form-check-label"><?php echo $tags->tag_name;?></label>
-                                            </div>
-                                            <?php endforeach;?>
-
-                                            <br>
-                                            <?php if(isset($data['cbErr'])):?>
-                                            <small class="text-danger">
-                                                <?php echo $data['cbErr'];?>
-                                            </small>
-                                            <?php endif;?>
-                                        </div>
-                    
-                                        <!-- HIDDEN USER ID -->
-                                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['user']['user_id'];?>">
-                    
-                                        <!-- SWITCH FOR ANON -->
-                                        <div class="form-row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <div class="custom-control custom-switch">
-                                                        <input type="checkbox" name="show_author" id="show" class="custom-control-input">
-                                                        <label for="show" class="custom-control-label">Show username</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                    
-                                            <!-- SUBMIT -->
-                                            <div class="col-6 d-flex justify-content-end">
-                                                <div class="form-group">
-                                                    <input type="submit" name="add-post" value="Add Post" class="btn btn-primary">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endif?>
-
                         <!-- ALL POSTS -->
                         <?php foreach($data['posts'] as $post):?>
                         <div class="shadow-lg p-3 mb-3 bg-white rounded">

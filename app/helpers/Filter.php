@@ -62,6 +62,10 @@ class Filter{
                 case 'comment_body': 
                     $this->errors[$key]['errors'] = [$this->requiredString($value)];
                     break;
+
+                case 'tag_name': 
+                    $this->errors[$key]['errors'] = [$this->requiredString($value)];
+                    break;
                 default: 
                     array_push($this->unfilterable, $value);
                 break;

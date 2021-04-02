@@ -1,7 +1,7 @@
 <?php
     include_once '../app/views/includes/header.php';
 ?>
-        <main>  
+        <main> 
             <div class="container p-3">
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12 order-lg-2 order-md-2 order-sm-1">
@@ -13,7 +13,7 @@
                             
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-4">
-                                    <a href="#">All</a>
+                                    <a href="../<?php echo $_SESSION['user']['user_type'];?>/timeline?<?php echo $_SESSION['user']['user_id'];?>">All</a>
                                 </div>
 
                                 <?php foreach($data['tags'] as $tag):?>

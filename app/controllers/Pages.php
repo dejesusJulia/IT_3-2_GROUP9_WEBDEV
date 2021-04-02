@@ -6,6 +6,9 @@ class Pages extends Controller{
         $this->postModel = $this->model('Post');
         $this->userModel = $this->model('User');
         $this->commentModel = $this->model('Comment');
+        $this->likeModel = $this->model('Like');
+        $this->categoryModel = $this->model('Category');
+        $this->tagModel = $this->model('Tag');
     }
 
     # LANDING PAGE
@@ -32,7 +35,15 @@ class Pages extends Controller{
     public function home(){
         session_start();
         $posts = $this->postModel->joinUserPost();
-        $data = ['posts' => $posts];
+        $likes = $this->likeModel->countPostLikes();
+        $tags = $this->tagModel->all();
+        $categs = $this->categoryModel->joinCategoriesTags();
+        $data = [
+            'posts' => $posts, 
+            'likes' => $likes,
+            'tags' => $tags, 
+            'categs' => $categs
+        ];
         $this->view('home', $data);
     }
 
@@ -41,7 +52,16 @@ class Pages extends Controller{
         session_start();
         // $posts holds all the post of one user
         $posts = $this->postModel->getUserPost($i);
-        $this->view('users/timeline', $posts);
+        $likes = $this->likeModel->countPostLikes();
+        $tags = $this->tagModel->all();
+        $categs = $this->categoryModel->joinCategoriesTags();
+        $data = [
+            'posts' => $posts, 
+            'likes' => $likes, 
+            'categs' => $categs, 
+            'tags' => $tags
+        ];
+        $this->view('users/timeline', $data);
     }
 
     # REDIRECT HOME FOR USER
@@ -56,7 +76,15 @@ class Pages extends Controller{
             die();
         }
         $posts = $this->postModel->joinUserPost();
-        $data = ['posts' => $posts];
+        $likes = $this->likeModel->countPostLikes();
+        $categs = $this->categoryModel->joinCategoriesTags();
+        $tags = $this->tagModel->all();
+        $data = [
+            'posts' => $posts, 
+            'likes' => $likes, 
+            'categs' => $categs,
+            'tags' => $tags
+        ];
         $this->view('home', $data);
     }
 
@@ -71,7 +99,18 @@ class Pages extends Controller{
             die();
         }
         $post = $this->postModel->getPost($i);
-        $data = ['post' => $post];
+        $tags = $this->tagModel->all();
+        $categs = $this->categoryModel->tagIdOfPost($i);
+        $categArr = [];
+        foreach($categs as $c){
+            array_push($categArr, $c->tag_id);
+        }
+        
+        $data = [
+            'post' => $post, 
+            'tags' => $tags, 
+            'categs' => $categArr
+        ];
         $this->view('users/edit-post', $data);
     }
     
@@ -87,7 +126,15 @@ class Pages extends Controller{
             die();
         }
         $posts = $this->postModel->joinUserPost();
-        $data = ['posts' => $posts];
+        $likes = $this->likeModel->countPostLikes();
+        $categs = $this->categoryModel->joinCategoriesTags();
+        $tags = $this->tagModel->all();
+        $data = [
+            'posts' => $posts, 
+            'likes' => $likes, 
+            'categs' => $categs,
+            'tags' => $tags
+        ];
         $this->view('home', $data);
     }
 
@@ -102,28 +149,35 @@ class Pages extends Controller{
             header('Location: ../user/home');
             die();
         }
-        $posts = $this->postModel->all();
+        $posts = $this->postModel->getMonthlyPosts();
         $users = $this->userModel->allUserTypeOf('user');
         $admins = $this->userModel->allUserTypeOf('admin');
         $comments = $this->commentModel->all();
         $nonAnon = $this->postModel->getAnonPosts(1);
         $anon = $this->postModel->getAnonPosts(0);
 
-        $weekOne = date('Y-m-d h:i:s', strtotime('February 01 2021 12:00 am'));
+        $y = date('Y'); $m = date('m'); $last = date('t');
+        $weekOne = date('Y-m-d h:i:s', strtotime("$y-$m-01 12:00 am"));
         $weekOnePosts = 0;
         
-        $weekTwo = date('Y-m-d h:i:s', strtotime('February 08 2021 12:00 am'));
+        $weekTwo = date('Y-m-d h:i:s', strtotime("$y-$m-10 12:00 am"));
         $weekTwoPosts = 0;
 
-        $weekThree = date('Y-m-d h:i:s', strtotime('February 22 2021 12:00 am'));
+        $weekThree = date('Y-m-d h:i:s', strtotime("$y-$m-20 12:00 am"));
         $weekThreePosts = 0;
+
+        $weekFour = date('Y-m-d h:i:s', strtotime("$y-$m-$last 12:00 am"));
+        $weekFourPosts = 0;
+
         foreach($posts as $post){
-            if($post->created_at == $weekOne && $post->created_at < $weekTwo){
+            if($post->created_at >= $weekOne && $post->created_at < $weekTwo){
                 $weekOnePosts++;
-            }else if($post->created_at == $weekTwo && $post->created_at < $weekThree){
+            }else if($post->created_at >= $weekTwo && $post->created_at < $weekThree){
                 $weekTwoPosts++;
-            }else{
+            }else if($post->created_at >= $weekThree && $post->created_at < $weekFour){
                 $weekThreePosts++;
+            }else if($post->created_at == $weekFour){
+                $weekFourPosts++;
             }
         }
 
@@ -137,6 +191,7 @@ class Pages extends Controller{
             'weekOne' => $weekOnePosts,
             'weekTwo' => $weekTwoPosts,
             'weekThree' => $weekThreePosts,
+            'weekFour' => $weekFourPosts
         ];
         $this->view('admins/dashboard', $data);
         
@@ -147,7 +202,15 @@ class Pages extends Controller{
         session_start();
         // $posts holds all the post of one user
         $posts = $this->postModel->getUserPost($i);
-        $this->view('admins/timeline', $posts);
+        $likes = $this->likeModel->countPostLikes();
+        $categs = $this->categoryModel->joinCategoriesTags();
+        $data = [
+            'posts' => $posts, 
+            'likes' => $likes, 
+            'categs' => $categs
+        ];
+
+        $this->view('admins/timeline', $data);
     }
 
     # ADMIN PAGES - EDIT POST
@@ -161,7 +224,18 @@ class Pages extends Controller{
             die();
         }
         $post = $this->postModel->getPost($i);
-        $data = ['post' => $post];
+        $tags = $this->tagModel->all();
+        $categs = $this->categoryModel->tagIdOfPost($i);
+        $categArr = [];
+        foreach($categs as $c){
+            array_push($categArr, $c->tag_id);
+        }
+
+        $data = [
+            'post' => $post, 
+            'tags' => $tags, 
+            'categs' => $categArr
+        ];
         $this->view('admins/edit-post', $data);
     }    
     
@@ -184,7 +258,7 @@ class Pages extends Controller{
         $this->view('admins/user-list', $data);
     }  
 
-    # UPDATE USER TYPE GET REQUEST
+    # ADMIN PAGE - UPDATE USER TYPE GET REQUEST
     public function updateUserTypes($i){
         session_start();
         if(!isset($_SESSION['user']['user_type'])){
@@ -204,6 +278,48 @@ class Pages extends Controller{
         $this->view('admins/user-edit', $data);
     }
 
+    # ADMIN PAGE - TAGS LIST
+    public function tagList(){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+        $tags = $this->tagModel->all();
+        $postCount = $this->categoryModel->selectPostCount();
+        // $tags = $this->tagModel->joinTagsCategories();
+
+        $data = [
+            'tags' => $tags, 
+            'postCount' => $postCount
+        ];
+
+        $this->view('admins/tag-list', $data);
+    }
+
+    # ADMIN PAGE - TAG EDIT
+    public function updateTag($i){
+        session_start();
+        if(!isset($_SESSION['user']['user_type'])){
+            header('Location: home');
+            die();
+        }else if($_SESSION['user']['user_type'] == 'user'){
+            header('Location: ../user/home');
+            die();
+        }
+
+        $tag  = $this->tagModel->getTag($i);
+
+        $data = [
+            'tagData' => $tag
+        ];
+
+        $this->view('admins/tag-edit', $data);
+    }
+
     # USER PAGES - COMMENT PAGE
     public function userComment($i){
         session_start();
@@ -214,11 +330,13 @@ class Pages extends Controller{
             header('Location: ../admin/home');
             die();
         }
+        $categs = $this->categoryModel->joinCategoriesTags();
         $post = $this->postModel->joinUserPostSingle($i, $_SESSION['user']['user_id']);
         $comments = $this->commentModel->joinUserCommentsOfPost($i);
         $data = [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'categs' => $categs
         ];
         $this->view('comment', $data);
     }
@@ -233,11 +351,13 @@ class Pages extends Controller{
             header('Location: ../user/home');
             die();
         }
+        $categs = $this->categoryModel->joinCategoriesTags();
         $post = $this->postModel->joinUserPostSingle($i, $_SESSION['user']['user_id']);
         $comments = $this->commentModel->joinUserCommentsOfPost($i);
         $data = [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments, 
+            'categs' => $categs
         ];
         $this->view('comment', $data);
     }
