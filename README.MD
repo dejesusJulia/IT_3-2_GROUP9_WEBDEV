@@ -1,11 +1,12 @@
 # DOCUMENTATION of WEB DEV PROJECT
-*Hello groupmates :)*
 
 ## Brief Description
-This project is created as a school requirement for the subject Web Development
+This project is originally created for a school requirement for the subject Web Development.
 
 ## File Structure
 This project uses the Model-View-Controller (MVC) pattern which is a common structure on web development frameworks such as Laravel. The structure of this project is inspired from the YouTube videos of Code with Dary and Codeholic (creating PHP framework from Scratch), and then modified for the needs of the projects. (*Note: All the files are redirected to public/index.php through .htaccess files*)
+
+Design-wise, this system used a Bootstrap template for the admin panel while the design for the users panel is a modified design from the YouTube channel Bedimcode.
 
 ### Directory
 The root folder has two main subfolders - *app* and *public*. All the controls for the application are in the app directory, while the public directory is where all the files are redirected to.
@@ -72,50 +73,13 @@ $this->views('viewname/without/PHPextenstion', $optionalParameter)
 ```
 
 ----------------------------------------------------------------
-## PROGRESS
-### Front End: 100%
-
-#### Coded
- - [x] landing page
- - [x] login page
- - [x] register page
- - [x] home page (guest)
- - [x] home page (user)
- - [x] timeline page (user)
- - [x] edit post (user)
- - [x] profile page 
- - [x] dashboard (admin)
- - [x] user-list (admin)
- - [x] user-edit (admin)
- - [x] post-edit (admin)
-
-### Back End: 100%
-#### Users
-- [x] Create (Register)
-- [x] Read all
-- [x] Read one
-- [x] Update user profile
-- [x] Update user type
-- [x] Delete user
-
-#### Posts
-- [x] Create
-- [x] Read all
-- [x] Read one
-- [x] Update post
-- [x] Delete post
-
-#### Comments
-- [x] Create
-- [x] Read all
-- [x] Read one
-- [x] Update comment
-- [x] Delete comment
-
-#### CHANGES TO APPLY
-- [x] Insert AVATAR and CREATED_AT column in users table
-- [x] Make each user email unique 
-- [X] Unlink unused images (replaced by udpate)
-- [x] Refactor functions for cleaner code 
-
+## SYSTEM FEATURES
+- Text and image posting (USER & ADMIN)
+- Post commenting (USER & ADMIN)
+- Read posts according to classification/topics/tags (USER & ADMIN)
+- CRUD operations on a personal user post (USER & ADMIN)
+- Modify personal user profile (USER & ADMIN)
+- CRUD operations on the post tags/topics (ADMIN)
+- Modify user type/access of a user (ADMIN)
+- Delete existing users (ADMIN)
 
